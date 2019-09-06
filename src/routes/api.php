@@ -5,18 +5,18 @@ Route::middleware(['web', 'auth', 'core'])
             ->prefix('api/emails')->as('emails.')
             ->group(function () {
                 // Route::get('', 'Index')->name('index');
-        // Route::get('create', 'Create')->name('create');
-        // Route::post('', 'Store')->name('store');
-        // Route::get('{email}/edit', 'Edit')->name('edit');
+                // Route::get('create', 'Create')->name('create');
+                // Route::post('', 'Store')->name('store');
+                // Route::get('{email}/edit', 'Edit')->name('edit');
 
-        // Route::patch('{email}', 'Update')->name('update');
+                // Route::patch('{email}', 'Update')->name('update');
 
-        // Route::delete('{email}', 'Destroy')->name('destroy');
+                // Route::delete('{email}', 'Destroy')->name('destroy');
 
-        // Route::get('initTable', 'InitTable')->name('initTable');
-        // Route::get('tableData', 'TableData')->name('tableData');
-        // Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
+                Route::get('initTable', 'InitTable')->name('initTable');
+                Route::get('tableData', 'TableData')->name('tableData');
+                Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
 
-        // Route::get('options', 'Options')->name('options');
+                Route::get('options', 'Options')->name('options');
             });
     });

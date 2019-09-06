@@ -3,10 +3,7 @@
     "routePrefix": "emails",
     "crtNo": true,
     "buttons": [
-        "excel",
-        "create",
-        "edit",
-        "destroy"
+        "excel"
     ],
     "columns": [
         {

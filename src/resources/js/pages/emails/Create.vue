@@ -1,18 +1,16 @@
 <template>
     <div class="columns is-centered">
-        <div class="column is-three-quarters-desktop is-full-touch">
-            <enso-form class="box form-box has-background-light raises-on-hover"/>
-        </div>
+        <span/>
     </div>
 </template>
 
 <script>
-import { EnsoForm } from '@enso-ui/bulma';
+import { } from '@enso-ui/bulma';
 
 export default {
     name: 'Create',
 
-    components: { EnsoForm },
+    components: { },
 };
 </script>
 
