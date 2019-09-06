@@ -1,0 +1,15 @@
+{
+    "name": "Email",
+    "routePrefix": "emails",
+    "crtNo": true,
+    "buttons": ["excel", "create", "show", "edit", "destroy"],
+    "columns": [{
+        "label": "Id",
+        "name": "id",
+        "data": "emails.id",
+        "meta": [
+            "searchable",
+            "sortable"
+        ]
+    }]
+}
