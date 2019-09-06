@@ -1,4 +1,4 @@
-const EmailCreate = () => import('@pages/emails/Create.vue');
+const EmailCreate = () => import('@emails/pages/emails/Create.vue');
 
 export default {
     name: 'emails.create',

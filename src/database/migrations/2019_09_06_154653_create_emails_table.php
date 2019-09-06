@@ -6,24 +6,24 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateEmailsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('emails', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('subject');
+            $table->text('body');
+            $table->tinyInteger('priority')->unsigned();
+
+            $table->date('schedule_at')->nullable();
+            $table->date('sent_at')->nullable();
+
+            $table->integer('created_by')->unsigned();
+            $table->foreign('created_by')->references('id')->on('users');
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('emails');

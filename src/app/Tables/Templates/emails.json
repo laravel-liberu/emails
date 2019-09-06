@@ -2,14 +2,67 @@
     "name": "Email",
     "routePrefix": "emails",
     "crtNo": true,
-    "buttons": ["excel", "create", "show", "edit", "destroy"],
-    "columns": [{
-        "label": "Id",
-        "name": "id",
-        "data": "emails.id",
-        "meta": [
-            "searchable",
-            "sortable"
-        ]
-    }]
+    "buttons": [
+        "excel",
+        "create",
+        "edit",
+        "destroy"
+    ],
+    "columns": [
+        {
+            "label": "Priority",
+            "name": "priority",
+            "enum": "LaravelEnso\\Emails\\app\\Enums\\Priorities",
+            "data": "emails.priority",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Subject",
+            "name": "subject",
+            "data": "emails.subject",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Body",
+            "name": "body",
+            "data": "emails.body",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Schedule",
+            "name": "scheduleAt",
+            "data": "emails.schedule_at",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Sent",
+            "name": "sentAt",
+            "data": "emails.sent_at",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Created by",
+            "name": "createdBy",
+            "data": "emails.created_by",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        }
+    ]
 }

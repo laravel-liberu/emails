@@ -1,4 +1,4 @@
-const EmailEdit = () => import('@pages/emails/Edit.vue');
+const EmailEdit = () => import('@emails/pages/emails/Edit.vue');
 
 export default {
     name: 'emails.edit',

@@ -6,7 +6,11 @@
     "keywords": [],
     "homepage": "https://www.laravel-enso.com",
     "require": {
-        "php": ">=7.1.3"
+        "php": ">=7.1.3",
+        "laravel-enso/helpers": "1.11.*",
+        "laravel-enso/files": "3.1.*",
+        "laravel-enso/tables": "2.1.*",
+        "laravel-enso/enums": "1.0.*"
     },
     "autoload": {
         "psr-4": {
@@ -17,7 +21,8 @@
         "laravel": {
             "providers": [
                 "LaravelEnso\\Emails\\AppServiceProvider",
-                "LaravelEnso\\Emails\\AuthServiceProvider"
+                "LaravelEnso\\Emails\\AuthServiceProvider",
+                "LaravelEnso\\Products\\EnumServiceProvider"
             ]
         }
     }

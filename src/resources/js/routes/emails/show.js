@@ -1,4 +1,4 @@
-const EmailShow = () => import('@pages/emails/Show.vue');
+const EmailShow = () => import('@emails/pages/emails/Show.vue');
 
 export default {
     name: 'emails.show',

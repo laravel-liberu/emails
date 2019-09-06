@@ -1,4 +1,4 @@
-const EmailIndex = () => import('@pages/emails/Index.vue');
+const EmailIndex = () => import('@emails/pages/emails/Index.vue');
 
 export default {
     name: 'emails.index',
