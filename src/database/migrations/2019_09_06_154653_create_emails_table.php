@@ -10,12 +10,13 @@ class CreateEmailsTable extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('subject');
             $table->text('body');
             $table->tinyInteger('priority')->unsigned();
 
-            $table->date('schedule_at')->nullable();
-            $table->date('sent_at')->nullable();
+            $table->dateTime('schedule_at')->nullable();
+            $table->dateTime('sent_at')->nullable();
 
             $table->integer('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users');

@@ -14,7 +14,8 @@ class EmailTable extends Table
         return Email::selectRaw('
             emails.id as "dtRowId",emails.id,
             emails.subject, emails.body, emails.priority,
-            emails.schedule_at, emails.sent_at, emails.created_by
-        ');
+            emails.schedule_at, emails.sent_at, people.name as createdBy
+        ')->join('users', 'emails.created_by', '=', 'users.id')
+        ->join('people', 'users.person_id', '=', 'people.id');
     }
 }

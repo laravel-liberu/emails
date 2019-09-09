@@ -3,7 +3,14 @@
     "routePrefix": "emails",
     "crtNo": true,
     "buttons": [
-        "excel"
+        "destroy", 
+        {
+            "icon": "pencil-alt",
+            "type": "global",
+            "class": "is-button",
+            "event": "compose",
+            "label": "Compose"
+        }
     ],
     "columns": [
         {
@@ -55,7 +62,7 @@
         {
             "label": "Created by",
             "name": "createdBy",
-            "data": "emails.created_by",
+            "data": "createdBy",
             "meta": [
                 "searchable",
                 "sortable"

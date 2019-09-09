@@ -4,11 +4,12 @@ namespace LaravelEnso\Emails\app;
 
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 use LaravelEnso\Helpers\app\Traits\DateAttributes;
 
 class Email extends Model
 {
-    use DateAttributes;
+    use DateAttributes, CreatedBy;
 
     protected $fillable = [
         'subject', 'body', 'priority', 'schedule_at',
@@ -29,7 +30,9 @@ class Email extends Model
 
     public function setScheduleAt($value)
     {
-        $this->fillDateAttribute('schedule_at', $value);
+        \Log::info('am trecut peaici');
+        \Log::info($value);
+        $this->fillDateAttribute('schedule_at', $value, 'd-m-Y H:i:s');
     }
 
     public function setSentAt($value)
