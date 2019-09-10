@@ -5,8 +5,9 @@
             v-if="!compose"
             @compose="compose = true">
             <template v-slot:priority="{ row }">
-                <span class="tag is-table-tag has-margin-right-small">
-                    {{ row.priority }}
+                <span class="tag is-table-tag has-margin-right-small"
+                    :class="enums.emailPriorityLabels._get(row.priority)">
+                    {{ enums.emailPriorities._get(row.priority) }}
                 </span>
             </template>
         </enso-table>
@@ -40,9 +41,9 @@ export default {
         compose: null,
     }),
 
-    // computed: {
-    //     ...mapState('local', ['enums']),
-    // },
+    computed: {
+        ...mapState(['enums']),
+    },
 };
 </script>
 

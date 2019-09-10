@@ -16,7 +16,6 @@
         {
             "label": "Priority",
             "name": "priority",
-            "enum": "LaravelEnso\\Emails\\app\\Enums\\Priorities",
             "data": "emails.priority",
             "meta": [
                 "slot",
