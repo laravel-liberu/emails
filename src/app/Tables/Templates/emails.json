@@ -44,8 +44,8 @@
         },
         {
             "label": "Schedule",
-            "name": "scheduleAt",
-            "data": "scheduleAt",
+            "name": "schedule_at",
+            "data": "emails.schedule_at",
             "meta": [
                 "searchable",
                 "sortable"
@@ -63,7 +63,7 @@
         {
             "label": "Created by",
             "name": "createdBy",
-            "data": "createdBy",
+            "data": "people.name",
             "meta": [
                 "searchable",
                 "sortable"
