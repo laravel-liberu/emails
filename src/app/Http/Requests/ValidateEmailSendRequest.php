@@ -1,4 +1,5 @@
 <?php
+
 namespace LaravelEnso\Emails\app\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -12,11 +13,13 @@ class ValidateEmailSendRequest extends FormRequest
 
     public function rules()
     {
-        \Log::info($this->all());
+        \Log::info('Am intrat in validator. Acesta este tot requestul');
+        \Log::info(gettype($this->get('schedule_at')));
+
         return [
             'subject' => 'required|string|max:255',
             'body' => 'nullable|string',
-            'schedule_at' => 'nullable|date_format:"d-m-Y H:i:s"',
+            'schedule_at' => 'nullable|string',
         ];
     }
 }

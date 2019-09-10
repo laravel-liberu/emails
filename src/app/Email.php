@@ -30,9 +30,7 @@ class Email extends Model
 
     public function setScheduleAt($value)
     {
-        \Log::info('am trecut peaici');
-        \Log::info($value);
-        $this->fillDateAttribute('schedule_at', $value, 'd-m-Y H:i:s');
+        $this->fillDateAttribute('schedule_at', $value, 'Y-m-d H:i:ss');
     }
 
     public function setSentAt($value)

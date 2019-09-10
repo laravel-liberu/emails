@@ -3,7 +3,13 @@
         <enso-table class="box is-paddingless raises-on-hover"
             id="emails"
             v-if="!compose"
-            @compose="compose = true"/>
+            @compose="compose = true">
+            <template v-slot:priority="{ row }">
+                <span class="tag is-table-tag has-margin-right-small">
+                    {{ row.priority }}
+                </span>
+            </template>
+        </enso-table>
             <div class="columns is-centered">
                 <email-form
                     class="column is-three-quarters-desktop is-full-touch"
@@ -16,11 +22,13 @@
 
 <script>
 
+import { mapState } from 'vuex';
 import { EnsoTable } from '@enso-ui/bulma';
 import EmailForm from './components/EmailForm.vue';
 
 export default {
     name: 'Index',
+
     inject: ['errorHandler', 'i18n'],
 
     components: {
@@ -31,6 +39,10 @@ export default {
     data: () => ({
         compose: null,
     }),
+
+    // computed: {
+    //     ...mapState('local', ['enums']),
+    // },
 };
 </script>
 

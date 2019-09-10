@@ -17,7 +17,7 @@
             </label>
             <enso-datepicker time
                 v-model="scheduleAt"
-                format="d-m-Y H:i:s"/>
+                format="Y-m-d H:i:ss"/>
         </div>
         <div class="has-margin-bottom-medium">
             <label class="label">

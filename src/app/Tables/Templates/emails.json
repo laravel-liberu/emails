@@ -19,6 +19,7 @@
             "enum": "LaravelEnso\\Emails\\app\\Enums\\Priorities",
             "data": "emails.priority",
             "meta": [
+                "slot",
                 "searchable",
                 "sortable"
             ]
@@ -44,7 +45,7 @@
         {
             "label": "Schedule",
             "name": "scheduleAt",
-            "data": "emails.schedule_at",
+            "data": "scheduleAt",
             "meta": [
                 "searchable",
                 "sortable"

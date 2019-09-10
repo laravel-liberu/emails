@@ -22,7 +22,7 @@
             "providers": [
                 "LaravelEnso\\Emails\\AppServiceProvider",
                 "LaravelEnso\\Emails\\AuthServiceProvider",
-                "LaravelEnso\\Products\\EnumServiceProvider"
+                "LaravelEnso\\Emails\\EnumServiceProvider"
             ]
         }
     }
