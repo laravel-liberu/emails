@@ -5,8 +5,9 @@
             v-if="!compose"
             @compose="compose = true">
             <template v-slot:priority="{ row }">
-                <span class="tag is-table-tag has-margin-right-small">
-                    {{ row.priority }}
+                <span class="tag is-table-tag has-margin-right-small"
+                    :class="enums.emailPriorityLabels._get(row.priority)">
+                    {{ enums.emailPriorities._get(row.priority) }}
                 </span>
             </template>
         </enso-table>
@@ -22,6 +23,7 @@
 
 <script>
 
+import { mapState } from 'vuex';
 import { EnsoTable } from '@enso-ui/bulma';
 import EmailForm from './components/EmailForm.vue';
 
@@ -38,6 +40,10 @@ export default {
     data: () => ({
         compose: null,
     }),
+
+    computed: {
+        ...mapState(['enums']),
+    },
 };
 </script>
 

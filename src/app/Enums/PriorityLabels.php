@@ -8,7 +8,7 @@ class PriorityLabels extends Enum
 {
     protected static $data = [
         Priorities::High => 'is-danger',
-        Priorities::Normal => 'is-worning',
+        Priorities::Normal => 'is-warning',
         Priorities::Low => 'is-success',
     ];
 }
