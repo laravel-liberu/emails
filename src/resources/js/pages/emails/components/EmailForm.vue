@@ -1,6 +1,34 @@
 <template>
     <div class="notification-form-wrapper box raises-on-hover has-background-light">
-        <div class="columns is-mobile">
+        <recipients class="has-margin-bottom-medium"
+            :to="email.to"
+            :cc="email.cc"
+            :bcc="email.bcc"/>
+        <div class="columns">
+            <div class="column is-10">
+                <div>
+                    <label class="label">
+                        {{ i18n('Subject') }}
+                    </label>
+                    <input class="input"
+                        :class="{'is-danger': subjectError}"
+                        v-model="email.subject"
+                        @input="subjectError = false">
+                    <error message="A subject is required!"
+                        v-if="subjectError"/>
+                </div>
+            </div>
+            <div class="column is-2 has-text-centered">
+                <div>
+                    <label class="label">
+                        {{ i18n('Priority') }}
+                    </label>
+                    <priority-selector :value="email.priority"
+                        @input="email.priority = $event"/>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="columns is-mobile is-centered">
             <div class="column is-10">
                 <label class="label">
                     {{ i18n('Subject') }}
@@ -12,14 +40,14 @@
                 <error message="A subject is required!"
                     v-if="subjectError"/>
                 </div>
-            <div class="column is-2">
-                <label class="label">
+            <div class="column has-text-right">
+                <label class="label has-text-centered">
                     {{ i18n('Priority') }}
                 </label>
                 <priority-selector :value="email.priority"
                     @input="email.priority = $event"/>
             </div>
-        </div>
+        </div> -->
         <div class="has-margin-bottom-medium">
             <label class="label">
                 {{ i18n('Schedule At') }}
@@ -58,9 +86,10 @@
 
 import { mapState } from 'vuex';
 import { EnsoDatepicker } from '@enso-ui/bulma';
-import Error from './Error.vue';
-import FileBrowser from './FileBrowser.vue';
+import Recipients from './Recipients.vue';
 import PrioritySelector from './PrioritySelector.vue';
+import FileBrowser from './FileBrowser.vue';
+import Error from './Error.vue';
 
 export default {
     name: 'EmailForm',
@@ -68,12 +97,15 @@ export default {
     inject: ['errorHandler', 'i18n'],
 
     components: {
-        Error, EnsoDatepicker, FileBrowser, PrioritySelector,
+        Error, EnsoDatepicker, FileBrowser, PrioritySelector, Recipients,
     },
 
     data() {
         return {
             email: {
+                to: [],
+                cc: [],
+                bcc: [],
                 subject: null,
                 body: null,
                 scheduleAt: null,
@@ -82,7 +114,6 @@ export default {
             formData: new FormData(),
             bodyError: false, // Todo: astea o sa dispara
             subjectError: false,
-            // recipientError: false,
             files: [],
         };
     },

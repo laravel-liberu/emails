@@ -11,14 +11,14 @@
                 </span>
             </template>
         </enso-table>
-            <div class="columns is-centered">
-                <email-form
-                    class="column is-three-quarters-desktop is-full-touch"
-                    v-if="compose"
-                    @sent="compose = !compose"
-                    @cancel="compose = !compose"/>
-            </div>
-</div>
+        <div class="columns is-centered">
+            <email-form
+                class="column is-three-quarters-desktop is-full-touch"
+                v-if="compose"
+                @sent="compose = !compose"
+                @cancel="compose = !compose"/>
+        </div>
+    </div>
 </template>
 
 <script>
