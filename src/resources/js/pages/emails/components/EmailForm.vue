@@ -1,23 +1,32 @@
 <template>
     <div class="notification-form-wrapper box raises-on-hover has-background-light">
-        <div class="has-margin-bottom-medium">
-            <label class="label">
-                {{ i18n('Subject') }}
-            </label>
-            <input class="input"
-                :class="{'is-danger': subjectError}"
-                v-model="subject"
-                @input="subjectError = false">
-            <error message="A subject is required!"
-                v-if="subjectError"/>
+        <div class="columns is-mobile">
+            <div class="column is-10">
+                <label class="label">
+                    {{ i18n('Subject') }}
+                </label>
+                <input class="input"
+                    :class="{'is-danger': subjectError}"
+                    v-model="email.subject"
+                    @input="subjectError = false">
+                <error message="A subject is required!"
+                    v-if="subjectError"/>
+                </div>
+            <div class="column is-2">
+                <label class="label">
+                    {{ i18n('Priority') }}
+                </label>
+                <priority-selector :value="email.priority"
+                    @input="email.priority = $event"/>
+            </div>
         </div>
         <div class="has-margin-bottom-medium">
             <label class="label">
                 {{ i18n('Schedule At') }}
             </label>
             <enso-datepicker time
-                v-model="scheduleAt"
-                format="Y-m-d H:i:ss"/>
+                v-model="email.scheduleAt"
+                format="d-m-Y H:i"/>
         </div>
         <div class="has-margin-bottom-medium">
             <label class="label">
@@ -25,7 +34,7 @@
             </label>
             <textarea class="textarea"
                 :class="{'is-danger': bodyError}"
-                v-model="body"
+                v-model="email.body"
                 @input="bodyError = false"/>
             <error message="A message is required!"
                 v-if="bodyError"/>
@@ -47,28 +56,43 @@
 
 <script>
 
+import { mapState } from 'vuex';
 import { EnsoDatepicker } from '@enso-ui/bulma';
 import Error from './Error.vue';
 import FileBrowser from './FileBrowser.vue';
+import PrioritySelector from './PrioritySelector.vue';
 
 export default {
     name: 'EmailForm',
 
     inject: ['errorHandler', 'i18n'],
 
-    components: { Error, EnsoDatepicker, FileBrowser },
+    components: {
+        Error, EnsoDatepicker, FileBrowser, PrioritySelector,
+    },
 
     data() {
         return {
-            subject: null,
-            body: null,
-            scheduleAt: null,
+            email: {
+                subject: null,
+                body: null,
+                scheduleAt: null,
+                priority: null,
+            },
+            formData: new FormData(),
             bodyError: false, // Todo: astea o sa dispara
             subjectError: false,
             // recipientError: false,
             files: [],
-            formData: new FormData(),
         };
+    },
+
+    computed: {
+        ...mapState(['enums']),
+    },
+
+    created() {
+        this.email.priority = this.enums.emailPriorities.Low;
     },
 
     methods: {
@@ -86,17 +110,18 @@ export default {
         },
 
         addParams() {
-            this.formData.append('subject', this.subject);
-            this.formData.append('body', this.body);
-            this.formData.append('schedule_at', this.scheduleAt);
+            Object.keys(this.email).forEach((key) => {
+                this.formData.append(key, this.email[key]);
+            });
+
             // this.recipients.forEach(rec => this.formData.append('recipients[]', rec));
             // for (let i = 0; i < this.files.length; i++) {
             //     this.formData.append(`file-${i}`, this.files[i]);
             // }
         },
         cancel() {
-            this.subject = null;
-            this.body = null;
+            this.email.subject = null;
+            this.email.body = null;
             // this.files = [];
             this.$emit('cancel');
         },

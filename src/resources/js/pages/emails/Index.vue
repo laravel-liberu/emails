@@ -22,7 +22,6 @@
 
 <script>
 
-import { mapState } from 'vuex';
 import { EnsoTable } from '@enso-ui/bulma';
 import EmailForm from './components/EmailForm.vue';
 
@@ -39,10 +38,6 @@ export default {
     data: () => ({
         compose: null,
     }),
-
-    // computed: {
-    //     ...mapState('local', ['enums']),
-    // },
 };
 </script>
 

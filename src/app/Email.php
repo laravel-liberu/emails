@@ -28,12 +28,12 @@ class Email extends Model
         )->withPivot('type');
     }
 
-    public function setScheduleAt($value)
+    public function setScheduleAtAttribute($value)
     {
-        $this->fillDateAttribute('schedule_at', $value, 'Y-m-d H:i:ss');
+        $this->fillDateAttribute('schedule_at', $value, 'd-m-Y H:i');
     }
 
-    public function setSentAt($value)
+    public function setSentAtAttribute($value)
     {
         $this->fillDateAttribute('sent_at', $value);
     }

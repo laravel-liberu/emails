@@ -46,18 +46,22 @@
             "label": "Schedule",
             "name": "schedule_at",
             "data": "emails.schedule_at",
+            "dateFormat": "d-m-Y H:i",
             "meta": [
                 "searchable",
-                "sortable"
+                "sortable",
+                "date"
             ]
         },
         {
             "label": "Sent",
-            "name": "sentAt",
+            "name": "sent_at",
             "data": "emails.sent_at",
+            "dateFormat": "d-m-Y H:i",
             "meta": [
                 "searchable",
-                "sortable"
+                "sortable",
+                "date"
             ]
         },
         {

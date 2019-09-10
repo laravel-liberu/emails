@@ -2,24 +2,27 @@
 
 namespace LaravelEnso\Emails\app\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use LaravelEnso\Emails\app\Enums\Priorities;
+use LaravelEnso\Helpers\app\Traits\MapsRequestKeys;
 
 class ValidateEmailSendRequest extends FormRequest
 {
+    use MapsRequestKeys;
+    
     public function authorize()
     {
-        return true;
+        return true; 
     }
 
     public function rules()
     {
-        \Log::info('Am intrat in validator. Acesta este tot requestul');
-        \Log::info(gettype($this->get('schedule_at')));
-
         return [
             'subject' => 'required|string|max:255',
             'body' => 'nullable|string',
-            'schedule_at' => 'nullable|string',
+            'scheduleAt' => 'nullable|date_format:d-m-Y H:i',
+            'priority' => Rule::in(Priorities::keys()),
         ];
     }
 }
