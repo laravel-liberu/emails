@@ -1,9 +1,7 @@
 <template>
     <div class="notification-form-wrapper box raises-on-hover has-background-light">
         <recipients class="has-margin-bottom-medium"
-            :to="email.to"
-            :cc="email.cc"
-            :bcc="email.bcc"/>
+            :email="email"/>
         <div class="columns">
             <div class="column is-10">
                 <div>
@@ -106,6 +104,7 @@ export default {
                 to: [],
                 cc: [],
                 bcc: [],
+                all: false,
                 subject: null,
                 body: null,
                 scheduleAt: null,
