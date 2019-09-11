@@ -15,7 +15,7 @@
             <email-form
                 class="column is-three-quarters-desktop is-full-touch"
                 v-if="compose"
-                @sent="compose = !compose"
+                @submit="compose = !compose"
                 @cancel="compose = !compose"/>
         </div>
     </div>

@@ -5,7 +5,7 @@
                 type="file"
                 multiple="multiple"
                 ref="browser"
-                @change="$emit('new-files', $refs.browser.files); files = $refs.browser.files">
+                @change="$emit('input', $refs.browser.files); files = $refs.browser.files">
             <span class="file-cta">
             <span class="file-icon">
                 <i class="fas fa-upload"/>

@@ -12,7 +12,7 @@ class CreateEmailsTable extends Migration
             $table->increments('id');
 
             $table->string('subject');
-            $table->text('body');
+            $table->text('body')->nullable();
             $table->tinyInteger('priority')->unsigned();
 
             $table->dateTime('schedule_at')->nullable();

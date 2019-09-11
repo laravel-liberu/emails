@@ -9,11 +9,11 @@
                         {{ i18n('Subject') }}
                     </label>
                     <input class="input"
-                        :class="{'is-danger': subjectError}"
+                        :class="{'is-danger': email.errors.has('subject')}"
                         v-model="email.subject"
-                        @input="subjectError = false">
-                    <error message="A subject is required!"
-                        v-if="subjectError"/>
+                        @input="email.errors.clear('subject')">
+                    <error :message="email.errors.get('subject')"
+                        v-if="email.errors.has('subject')"/>
                 </div>
             </div>
             <div class="column is-2 has-text-centered">
@@ -23,67 +23,53 @@
                     </label>
                     <priority-selector :value="email.priority"
                         @input="email.priority = $event"/>
+                    <error :message="email.errors.get('priority')"
+                        v-if="email.errors.has('priority')"/>
                 </div>
             </div>
         </div>
-        <!-- <div class="columns is-mobile is-centered">
-            <div class="column is-10">
-                <label class="label">
-                    {{ i18n('Subject') }}
-                </label>
-                <input class="input"
-                    :class="{'is-danger': subjectError}"
-                    v-model="email.subject"
-                    @input="subjectError = false">
-                <error message="A subject is required!"
-                    v-if="subjectError"/>
-                </div>
-            <div class="column has-text-right">
-                <label class="label has-text-centered">
-                    {{ i18n('Priority') }}
-                </label>
-                <priority-selector :value="email.priority"
-                    @input="email.priority = $event"/>
-            </div>
-        </div> -->
         <div class="has-margin-bottom-medium">
             <label class="label">
                 {{ i18n('Schedule At') }}
             </label>
-            <enso-datepicker time
+            <enso-datepicker :class="{'is-danger': email.errors.has('scheduleAt')}"
+                time
                 v-model="email.scheduleAt"
-                format="d-m-Y H:i"/>
+                format="d-m-Y H:i"
+                @input="email.errors.clear('scheduleAt')"/>
+            <error :message="email.errors.get('scheduleAt')"
+                v-if="email.errors.has('scheduleAt')"/>
         </div>
         <div class="has-margin-bottom-medium">
             <label class="label">
                 {{ i18n('Message') }}
             </label>
             <textarea class="textarea"
-                :class="{'is-danger': bodyError}"
+                :class="{'is-danger': email.errors.has('body')}"
                 v-model="email.body"
-                @input="bodyError = false"/>
-            <error message="A message is required!"
-                v-if="bodyError"/>
+                @input="email.errors.clear('body')"/>
+            <error :message="email.errors.get('body')"
+                v-if="email.errors.has('body')"/>
         </div>
-        <file-browser @new-files="files = $event"/>
+        <file-browser @input="files = $event"/>
         <div class="has-text-right">
             <button class="button has-margin-medium"
                 @click="cancel()">
                 {{ i18n('Cancel') }}
             </button>
             <button class="button is-link has-margin-medium"
-                @click="submit(); $emit('sent')">
+                @click="submit()">
                 {{ i18n('Send') }}
             </button>
         </div>
-    </file-browser>
-</div>
+    </div>
 </template>
 
 <script>
 
 import { mapState } from 'vuex';
 import { EnsoDatepicker } from '@enso-ui/bulma';
+import Errors from '@enso-ui/forms/errors';
 import Recipients from './Recipients.vue';
 import PrioritySelector from './PrioritySelector.vue';
 import FileBrowser from './FileBrowser.vue';
@@ -100,19 +86,8 @@ export default {
 
     data() {
         return {
-            email: {
-                to: [],
-                cc: [],
-                bcc: [],
-                all: false,
-                subject: null,
-                body: null,
-                scheduleAt: null,
-                priority: null,
-            },
+            email: this.factory(),
             formData: new FormData(),
-            bodyError: false, // Todo: astea o sa dispara
-            subjectError: false,
             files: [],
         };
     },
@@ -128,32 +103,64 @@ export default {
     methods: {
         submit() {
             this.addParams();
-            axios.post(
-                route('emails.store'),
-                this.formData,
-            ).then(({ data }) => {
-                this.formData = new FormData();
-                this.files = [];
-                this.$toastr.success(data.message);
-                this.$emit('submit');
-            }).catch(this.errorHandler);
+            axios.post(route('emails.store'), this.formData)
+                .then(({ data }) => {
+                    this.resetForm();
+                    this.$emit('submit');
+                    this.$toastr.success(data.message);
+                }).catch((error) => {
+                    const { status, data } = error.response;
+                    this.formData = new FormData();
+                    if (status === 422) {
+                        this.email.errors.set(data.errors);
+                        return;
+                    }
+                    this.$emit('submission-error');
+                    this.errorHandler(error);
+                });
         },
 
         addParams() {
-            Object.keys(this.email).forEach((key) => {
-                this.formData.append(key, this.email[key]);
+            const skip = ['all', 'errors'];
+            Object.keys(this.email).filter(key => !skip.includes(key))
+                .forEach((key) => {
+                    if (Array.isArray(this.email[key])) {
+                        this.addRecipients(key, this.email[key]);
+                    } else {
+                        this.formData.append(key, this.email[key] || '');
+                    }
+                });
+            this.formData.append('all', this.email.all);
+            for (let i = 0; i < this.files.length; i++) {
+                this.formData.append(`file-${i}`, this.files[i]);
+            }
+        },
+        addRecipients(key, recipients) {
+            recipients.forEach((id) => {
+                this.formData.append(`${key}[]`, id);
             });
-
-            // this.recipients.forEach(rec => this.formData.append('recipients[]', rec));
-            // for (let i = 0; i < this.files.length; i++) {
-            //     this.formData.append(`file-${i}`, this.files[i]);
-            // }
         },
         cancel() {
-            this.email.subject = null;
-            this.email.body = null;
-            // this.files = [];
+            this.resetForm();
             this.$emit('cancel');
+        },
+        resetForm() {
+            this.files = [];
+            this.email = this.factory();
+            this.formData = new FormData();
+        },
+        factory() {
+            return {
+                to: [],
+                cc: [],
+                bcc: [],
+                all: false,
+                subject: null,
+                body: null,
+                scheduleAt: null,
+                priority: null,
+                errors: new Errors(),
+            };
         },
     },
 };

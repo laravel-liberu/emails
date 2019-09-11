@@ -23,10 +23,14 @@
             </div>
             <div class="column is-11">
                 <enso-select class="is-inlineblock"
+                    :class="{'is-danger': email.errors.has('to')}"
                     multiple
                     source="administration.users.options"
                     label="person.name"
-                    v-model="email.to"/>
+                    v-model="email.to"
+                    @input="email.errors.clear('to')"/>
+                <error :message="email.errors.get('to')"
+                    v-if="email.errors.has('to')"/>
             </div>
         </div>
         <div class="columns is-vcentered" v-if="!email.all">
@@ -37,11 +41,15 @@
             </div>
             <div class="column is-11">
                 <enso-select class="is-inlineblock"
+                    :class="{'is-danger': email.errors.has('cc')}"
                     :v-if="!email.all"
                     multiple
                     source="administration.users.options"
                     label="person.name"
-                    v-model="email.cc"/>
+                    v-model="email.cc"
+                    @input="email.errors.clear('cc')"/>
+                <error :message="email.errors.get('cc')"
+                    v-if="email.errors.has('cc')"/>
             </div>
         </div>
         <div class="columns is-vcentered" v-if="!email.all">
@@ -52,11 +60,14 @@
             </div>
             <div class="column is-11">
                 <enso-select class="is-inlineblock"
-                    :v-if="!email.all"
+                    :class="{'is-danger': email.errors.has('bcc')}"
                     multiple
                     source="administration.users.options"
                     label="person.name"
-                    v-model="email.bcc"/>
+                    v-model="email.bcc"
+                    @input="email.errors.clear('bcc')"/>
+                <error :message="email.errors.get('bcc')"
+                    v-if="email.errors.has('bcc')"/>
             </div>
         </div>
     </div>
@@ -64,6 +75,7 @@
 
 <script>
 import { EnsoSelect, VueSwitch } from '@enso-ui/bulma';
+import Error from './Error.vue';
 
 export default {
     name: 'Recipients',
@@ -71,7 +83,7 @@ export default {
     inject: ['i18n'],
 
     components: {
-        EnsoSelect, VueSwitch,
+        EnsoSelect, VueSwitch, Error,
     },
 
     props: {
