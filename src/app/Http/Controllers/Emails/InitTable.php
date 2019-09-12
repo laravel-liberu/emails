@@ -2,9 +2,9 @@
 
 namespace LaravelEnso\Emails\app\Http\Controllers\Emails;
 
-use LaravelEnso\Emails\app\Tables\Builders\EmailTable;
 use Illuminate\Routing\Controller;
 use LaravelEnso\Tables\app\Traits\Init;
+use LaravelEnso\Emails\app\Tables\Builders\EmailTable;
 
 class InitTable extends Controller
 {

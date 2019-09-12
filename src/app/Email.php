@@ -4,6 +4,7 @@ namespace LaravelEnso\Emails\app;
 
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Emails\app\Enums\Statuses;
 use LaravelEnso\Emails\app\Enums\Types;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 use LaravelEnso\Helpers\app\Traits\DateAttributes;
@@ -59,6 +60,14 @@ class Email extends Model
         $this->syncSelected($to, $cc, $bcc);
     }
 
+    public function uploadAttachments($files)
+    {
+        collect($files)->each(function ($file) {
+            $attachment = $this->attachments()->create();
+            $attachment->upload($file);
+        });
+    }
+
     public function setScheduleAtAttribute($value)
     {
         $this->fillDateAttribute('schedule_at', $value, 'd-m-Y H:i');
@@ -67,6 +76,14 @@ class Email extends Model
     public function setSentAtAttribute($value)
     {
         $this->fillDateAttribute('sent_at', $value);
+    }
+
+    public function getStatusAttribute()
+    {
+        if(!$this->sent_at && !$this->schedule_at) {
+            return Statuses::Draft;
+        }
+        return $this->sent_at ? Statuses::Sent : Statuses::Scheduled;
     }
 
     private function syncAll()

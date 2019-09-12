@@ -12,21 +12,11 @@ class EmailNotification extends Notification
 {
     use Queueable;
 
-    protected $sender;
-    protected $cc;
-    protected $bcc;
-    protected $subject;
-    protected $body;
-    protected $attachments;
+    protected $email;
 
-    public function __construct(Email $email, array $files)
+    public function __construct(Email $email)
     {
-        $this->sender = $email->createdBy;
-        $this->cc = $email->cc()->pluck('email');
-        $this->bcc = $email->bcc()->pluck('email');
-        $this->subject = $email->subject;
-        $this->body = $email->body;
-        $this->attachments = $email->attachments()->with('file')->get();
+        $this->email = $email;
     }
 
     public function via($notifiable)
@@ -54,21 +44,32 @@ class EmailNotification extends Notification
 
     public function toMail($notifiable)
     {
-        $message = (new MailMessage)
-            ->from($this->sender->email, $this->sender->person->name)
-            ->cc($this->cc)
-            ->bcc($this->bcc)
-            ->subject($this->subject)
-            ->line($this->body)
+        return $this->attachFiles($this->createMessage());
+    }
+
+    private function createMessage()
+    {
+        return (new MailMessage)->from(
+                $this->email->createdBy->email,
+                $this->email->createdBy->name
+            )->priority($this->email->priority)
+            ->cc($this->email->cc()->pluck('email'))
+            ->bcc($this->email->bcc()->pluck('email'))
+            ->subject($this->email->subject)
+            ->line($this->email->body)
             ->line('Thank you for using our application!');
+    }
 
-        collect($this->attachments)->each(function ($attachment) use ($message) {
-            $message->attach(
-                storage_path('app/files/' . $attachment->file->saved_name), 
-                ['as' => $attachment->file->original_name]
-            );
-        });
+    private function attachFiles($message)
+    {
+        collect($this->email->attachments()->with('file')->get())
+            ->each(function ($attachment) use ($message) {
+                $message->attach(
+                    storage_path('app/files/' . $attachment->file->saved_name),
+                    ['as' => $attachment->file->original_name]
+                );
+            });
 
-        return $message;
+            return $message;
     }
 }

@@ -39,7 +39,10 @@ class ValidateEmailSendRequest extends FormRequest
         $validator->after(function ($validator) {
             if ($this->get('all') === 'false') {
                 $this->checkRecipients(
-                    $validator, $this->get('to'), $this->get('cc'), $this->get('bcc')
+                    $validator,
+                    $this->get('to'),
+                    $this->get('cc'),
+                    $this->get('bcc')
                 );
             }
 
@@ -55,18 +58,16 @@ class ValidateEmailSendRequest extends FormRequest
         if (empty($to)) {
             $validator->errors()
                 ->add('to', __('You must select at least one recipient!'));
-
             return;
         }
 
-        if (! empty($cc) && $this->intersectsAtLeastOne($cc, $to, $bcc)) {
+        if (! empty($cc) && $this->intersectsAtLeastOne($cc, $to, $bcc ?? [])) {
             $validator->errors()
                 ->add('cc', __('Some cc recipients are already selected in "to" or "bcc"!'));
-
             return;
         }
 
-        if (! empty($bcc) && $this->intersectsAtLeastOne($bcc, $to, $cc)) {
+        if (! empty($bcc) && $this->intersectsAtLeastOne($bcc, $to, $cc ?? [])) {
             $validator->errors()
                 ->add('bcc', __('Some bcc recipients are already selected in "to" or "cc"!'));
         }
@@ -82,8 +83,9 @@ class ValidateEmailSendRequest extends FormRequest
     {
         return $this->get('scheduleAt')
             ? Carbon::createFromFormat(
-                    'd-m-Y H:i', $this->get('scheduleAt')
-                )->isBefore(Carbon::now())
+                'd-m-Y H:i',
+                $this->get('scheduleAt')
+            )->isBefore(Carbon::now())
             : false;
     }
 }

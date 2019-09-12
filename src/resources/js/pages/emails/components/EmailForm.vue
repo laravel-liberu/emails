@@ -84,9 +84,15 @@ export default {
         Error, EnsoDatepicker, FileBrowser, PrioritySelector, Recipients,
     },
 
+    props: {
+        email: {
+            type: Object,
+            required: true,
+        },
+    },
+
     data() {
         return {
-            email: this.factory(),
             formData: new FormData(),
             files: [],
         };
@@ -97,7 +103,7 @@ export default {
     },
 
     created() {
-        this.email.priority = this.enums.emailPriorities.Low;
+        this.email.errors = new Errors();
     },
 
     methods: {
@@ -105,7 +111,8 @@ export default {
             this.addParams();
             axios.post(route('emails.send'), this.formData)
                 .then(({ data }) => {
-                    this.resetForm();
+                    this.formData = new FormData();
+                    this.files = [];
                     this.$emit('submit');
                     this.$toastr.success(data.message);
                 }).catch((error) => {
@@ -141,26 +148,9 @@ export default {
             });
         },
         cancel() {
-            this.resetForm();
-            this.$emit('cancel');
-        },
-        resetForm() {
-            this.files = [];
-            this.email = this.factory();
             this.formData = new FormData();
-        },
-        factory() {
-            return {
-                to: [],
-                cc: [],
-                bcc: [],
-                all: false,
-                subject: null,
-                body: null,
-                scheduleAt: null,
-                priority: null,
-                errors: new Errors(),
-            };
+            this.fiels = [];
+            this.$emit('cancel');
         },
     },
 };

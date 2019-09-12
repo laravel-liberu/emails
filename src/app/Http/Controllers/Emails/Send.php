@@ -16,20 +16,8 @@ class Send extends Controller
             $request->get('to'), $request->get('cc'),
             $request->get('bcc'), $request->get('all') === 'true'
         );
-
-        collect($request->allFiles())->each(function ($file) use ($email) {
-            $attachment = $email->attachments()->create();
-            $attachment->upload($file);
-        });
-
-        $files = collect($request->allFiles())->map(function($file) {
-            return $file->getClientOriginalName();
-        })->toArray();
-
-
-        EmailJob::dispatch( $email, $files );
-
-        //TODO status, browser destept
+        $email->uploadAttachments($request->allFiles());
+        EmailJob::dispatch($email);
 
         return [
             'message' => __('The email was successfully sent'),

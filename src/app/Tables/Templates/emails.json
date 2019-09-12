@@ -1,8 +1,17 @@
 {
     "name": "Email",
+    "appends": [
+        "status"
+    ],
     "routePrefix": "emails",
     "crtNo": true,
     "buttons": [
+        {
+            "icon": "eye",
+            "type": "row",
+            "class": "is-row-button",
+            "event": "show"
+        },
         "destroy", 
         {
             "icon": "pencil-alt",
@@ -13,6 +22,14 @@
         }
     ],
     "columns": [
+        {
+            "label": "Status",
+            "data": "email.status",
+            "name": "status",
+            "meta": [
+                "slot"
+            ]
+        },
         {
             "label": "Priority",
             "name": "priority",
