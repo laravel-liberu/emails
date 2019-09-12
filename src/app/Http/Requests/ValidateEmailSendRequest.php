@@ -37,34 +37,36 @@ class ValidateEmailSendRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if($this->get('all') === 'false') {
+            if ($this->get('all') === 'false') {
                 $this->checkRecipients(
-                    $validator, $this->get('to'), $this->get('cc' ), $this->get('bcc')
+                    $validator, $this->get('to'), $this->get('cc'), $this->get('bcc')
                 );
             }
 
-            if($this->invalidScheduleTime()) {
+            if ($this->invalidScheduleTime()) {
                 $validator->errors()
-                    ->add('scheduleAt', __('Schedule time must be after current time'));    
+                    ->add('scheduleAt', __('Schedule time must be after current time'));
             }
         });
     }
 
     private function checkRecipients($validator, $to, $cc, $bcc)
     {
-        if(empty($to)) {
+        if (empty($to)) {
             $validator->errors()
                 ->add('to', __('You must select at least one recipient!'));
+
             return;
         }
 
-        if(!empty($cc) && $this->intersectsAtLeastOne($cc, $to, $bcc)) {
+        if (! empty($cc) && $this->intersectsAtLeastOne($cc, $to, $bcc)) {
             $validator->errors()
                 ->add('cc', __('Some cc recipients are already selected in "to" or "bcc"!'));
+
             return;
         }
 
-        if(!empty($bcc) && $this->intersectsAtLeastOne($bcc, $to, $cc)) {
+        if (! empty($bcc) && $this->intersectsAtLeastOne($bcc, $to, $cc)) {
             $validator->errors()
                 ->add('bcc', __('Some bcc recipients are already selected in "to" or "cc"!'));
         }
@@ -72,8 +74,8 @@ class ValidateEmailSendRequest extends FormRequest
 
     private function intersectsAtLeastOne($toCheck, $array1, $array2)
     {
-        return !empty(array_intersect($toCheck, $array1)) 
-            || !empty(array_intersect($toCheck, $array2));
+        return ! empty(array_intersect($toCheck, $array1))
+            || ! empty(array_intersect($toCheck, $array2));
     }
 
     private function invalidScheduleTime()

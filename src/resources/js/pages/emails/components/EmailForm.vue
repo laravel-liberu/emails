@@ -103,7 +103,7 @@ export default {
     methods: {
         submit() {
             this.addParams();
-            axios.post(route('emails.store'), this.formData)
+            axios.post(route('emails.send'), this.formData)
                 .then(({ data }) => {
                     this.resetForm();
                     this.$emit('submit');

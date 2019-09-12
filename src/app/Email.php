@@ -28,7 +28,22 @@ class Email extends Model
             'recipient_id'
         )->withPivot('type');
     }
+    
+    public function to()
+    {
+        return $this->users()->whereType(Types::To);
+    }
 
+    public function cc()
+    {
+        return $this->users()->whereType(Types::Cc);
+    }
+
+    public function bcc()
+    {
+        return $this->users()->whereType(Types::Bcc);
+    }   
+   
     public function attachments()
     {
         return $this->morphMany(Attachment::class, 'attachable');
