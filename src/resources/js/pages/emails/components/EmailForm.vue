@@ -137,7 +137,7 @@ export default {
                         this.formData.append(key, this.email[key] || '');
                     }
                 });
-            this.formData.append('all', this.email.all);
+            this.formData.append('all', !!this.email.all);
             for (let i = 0; i < this.files.length; i++) {
                 this.formData.append(`file-${i}`, this.files[i]);
             }

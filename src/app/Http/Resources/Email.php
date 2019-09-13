@@ -13,7 +13,7 @@ class Email extends JsonResource
             'priority' => $this->priority,
             'subject' => $this->subject,
             'body' => $this->body,
-            'scheduleAt' => $this->schedule_at,
+            'scheduleAt' => optional($this->schedule_at)->format('d-m-Y H:i'),
             'sentAt' => $this->sent_at,
             'createdBy' => new TrackWho($this->whenLoaded('createdBy')),
             'to' => $this->whenLoaded('to', $this->to->pluck('id')),

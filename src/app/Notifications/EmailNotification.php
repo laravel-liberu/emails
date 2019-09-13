@@ -65,11 +65,11 @@ class EmailNotification extends Notification
         collect($this->email->attachments()->with('file')->get())
             ->each(function ($attachment) use ($message) {
                 $message->attach(
-                    storage_path('app/files/' . $attachment->file->saved_name),
+                    storage_path('app/files/'.$attachment->file->saved_name),
                     ['as' => $attachment->file->original_name]
                 );
             });
 
-            return $message;
+        return $message;
     }
 }

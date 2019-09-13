@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Emails\app\Http\Controllers\Emails;
 
+use Carbon\Carbon;
 use LaravelEnso\Emails\app\Email;
 use Illuminate\Routing\Controller;
 use LaravelEnso\Emails\Jobs\EmailJob;
@@ -17,7 +18,12 @@ class Send extends Controller
             $request->get('bcc'), $request->get('all') === 'true'
         );
         $email->uploadAttachments($request->allFiles());
-        EmailJob::dispatch($email);
+
+        $delay = $request->get('scheduleAt')
+            ? Carbon::createFromFormat('d-m-Y H:i', $request->get('scheduleAt'))
+            : null;
+
+        EmailJob::dispatch($email)->delay($delay);
 
         return [
             'message' => __('The email was successfully sent'),

@@ -25,20 +25,18 @@ class EmailJob implements ShouldQueue
         $this->queue = 'heavy';
         $this->timeout = 100;
 
-        $this->email = $email;      
+        $this->email = $email;
     }
 
     public function handle()
     {
-        $delay = 0;
-        $this->email->to->each(function ($user) use (&$delay) {
-                $user->each->notify(
-                    (new EmailNotification($this->email))
-                        ->onQueue('notifications')
-                        ->delay($delay)
-                );
-                $delay++;
-            });
+        $this->email->to->each(function ($user) {
+            $user->notify(
+                (new EmailNotification($this->email))
+                    ->onQueue('notifications')
+            );
+        });
+        
         $this->email->update(['sent_at' => Carbon::now()]);
     }
 }
