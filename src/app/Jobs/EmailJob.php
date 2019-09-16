@@ -36,7 +36,7 @@ class EmailJob implements ShouldQueue
                     ->onQueue('notifications')
             );
         });
-        
+
         $this->email->update(['sent_at' => Carbon::now()]);
     }
 }

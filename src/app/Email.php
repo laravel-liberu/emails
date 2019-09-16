@@ -2,12 +2,15 @@
 
 namespace LaravelEnso\Emails\app;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Emails\app\Enums\Statuses;
 use LaravelEnso\Emails\app\Enums\Types;
+use LaravelEnso\Emails\app\Enums\Statuses;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 use LaravelEnso\Helpers\app\Traits\DateAttributes;
+use LaravelEnso\Emails\Notifications\EmailNotification;
 
 class Email extends Model
 {
@@ -68,6 +71,18 @@ class Email extends Model
         });
     }
 
+    public function send()
+    {
+        $this->to->each(function ($user) {
+            $user->notify(
+                (new EmailNotification($this))
+                    ->onQueue('notifications')
+            );
+        });
+
+        $this->update(['sent_at' => Carbon::now()]);
+    }
+
     public function setScheduleAtAttribute($value)
     {
         $this->fillDateAttribute('schedule_at', $value, 'd-m-Y H:i');
@@ -110,5 +125,15 @@ class Email extends Model
             ->reduce(function($pivot, $id) use ($type) {
                 return $pivot->put($id, ['type' => $type]);
             }, collect());
+    }
+    public function delete()
+    {
+        DB::beginTransaction();
+        $this->to()->detach();
+        $this->bcc()->detach();
+        $this->cc()->detach();
+        $this->attachments->each->delete();
+        DB::commit();
+        parent::delete();
     } 
 }

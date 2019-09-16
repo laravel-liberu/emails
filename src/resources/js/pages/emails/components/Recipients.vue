@@ -24,6 +24,7 @@
             <div class="column is-11">
                 <enso-select class="is-inlineblock"
                     :class="{'is-danger': email.errors.has('to')}"
+                    placeholder="Select recipients"
                     multiple
                     source="administration.users.options"
                     label="person.name"
@@ -43,6 +44,7 @@
                 <enso-select class="is-inlineblock"
                     :class="{'is-danger': email.errors.has('cc')}"
                     :v-if="!email.all"
+                    placeholder="Select recipients"
                     multiple
                     source="administration.users.options"
                     label="person.name"
@@ -61,6 +63,7 @@
             <div class="column is-11">
                 <enso-select class="is-inlineblock"
                     :class="{'is-danger': email.errors.has('bcc')}"
+                    placeholder="Select recipients"
                     multiple
                     source="administration.users.options"
                     label="person.name"

@@ -2,7 +2,20 @@
     "name": "laravel-enso/emails",
     "type": "library",
     "description": "",
-    "authors": [],
+    "authors": [
+        {
+            "name": "Manuela Mindroc",
+            "email": "manuela.mindroc@earthlink.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Ionut-Catalin Sandu",
+            "email": "catalin.sandu@earthlink.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
     "keywords": [],
     "homepage": "https://www.laravel-enso.com",
     "require": {

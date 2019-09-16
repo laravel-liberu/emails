@@ -3,7 +3,7 @@
         <recipients class="has-margin-bottom-medium"
             :email="email"/>
         <div class="columns">
-            <div class="column is-10">
+            <div class="column is-12">
                 <div>
                     <label class="label">
                         {{ i18n('Subject') }}
@@ -16,6 +16,20 @@
                         v-if="email.errors.has('subject')"/>
                 </div>
             </div>
+        </div>
+        <div class="columns has-margin-bottom-medium">
+            <div class="column is-10 has-text-left">
+                <label class="label">
+                    {{ i18n('Schedule At') }}
+                </label>
+                <enso-datepicker :class="{'is-danger': email.errors.has('scheduleAt')}"
+                    time
+                    v-model="email.scheduleAt"
+                    format="d-m-Y H:i"
+                    @input="email.errors.clear('scheduleAt')"/>
+                <error :message="email.errors.get('scheduleAt')"
+                    v-if="email.errors.has('scheduleAt')"/>
+            </div>
             <div class="column is-2 has-text-centered">
                 <div>
                     <label class="label">
@@ -27,18 +41,6 @@
                         v-if="email.errors.has('priority')"/>
                 </div>
             </div>
-        </div>
-        <div class="has-margin-bottom-medium">
-            <label class="label">
-                {{ i18n('Schedule At') }}
-            </label>
-            <enso-datepicker :class="{'is-danger': email.errors.has('scheduleAt')}"
-                time
-                v-model="email.scheduleAt"
-                format="d-m-Y H:i"
-                @input="email.errors.clear('scheduleAt')"/>
-            <error :message="email.errors.get('scheduleAt')"
-                v-if="email.errors.has('scheduleAt')"/>
         </div>
         <div class="has-margin-bottom-medium">
             <label class="label">

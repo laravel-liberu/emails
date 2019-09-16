@@ -23,24 +23,6 @@
     ],
     "columns": [
         {
-            "label": "Status",
-            "data": "email.status",
-            "name": "status",
-            "meta": [
-                "slot"
-            ]
-        },
-        {
-            "label": "Priority",
-            "name": "priority",
-            "data": "emails.priority",
-            "meta": [
-                "slot",
-                "searchable",
-                "sortable"
-            ]
-        },
-        {
             "label": "Subject",
             "name": "subject",
             "data": "emails.subject",
@@ -50,9 +32,29 @@
             ]
         },
         {
-            "label": "Body",
-            "name": "body",
-            "data": "emails.body",
+            "label": "Sent at",
+            "name": "sent_at",
+            "data": "emails.sent_at",
+            "dateFormat": "d-m-Y H:i",
+            "meta": [
+                "searchable",
+                "sortable",
+                "date"
+            ]
+        },
+        {
+            "label": "Created by",
+            "name": "createdBy",
+            "data": "people.name",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Created at",
+            "name": "created_at",
+            "data": "emails.created_at",
             "meta": [
                 "searchable",
                 "sortable"
@@ -70,21 +72,19 @@
             ]
         },
         {
-            "label": "Sent",
-            "name": "sent_at",
-            "data": "emails.sent_at",
-            "dateFormat": "d-m-Y H:i",
+            "label": "Status",
+            "data": "email.status",
+            "name": "status",
             "meta": [
-                "searchable",
-                "sortable",
-                "date"
+                "slot"
             ]
         },
         {
-            "label": "Created by",
-            "name": "createdBy",
-            "data": "people.name",
+            "label": "Priority",
+            "name": "priority",
+            "data": "emails.priority",
             "meta": [
+                "slot",
                 "searchable",
                 "sortable"
             ]
