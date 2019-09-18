@@ -23,7 +23,7 @@
         "laravel-enso/helpers": "1.12.*",
         "laravel-enso/files": "3.2.*",
         "laravel-enso/tables": "2.2.*",
-        "laravel-enso/enums": "1.0.*"
+        "laravel-enso/enums": "1.1.*"
     },
     "autoload": {
         "psr-4": {
