@@ -6,7 +6,7 @@ Route::middleware(['web', 'auth', 'core'])
             ->group(function () {
                 Route::post('', 'Send')->name('send');
                 Route::get('{email}/show', 'Show')->name('show');
-                // Route::patch('{email}', 'Update')->name('update');
+                Route::post('/draft', 'Draft')->name('draft');
                 Route::delete('{email}', 'Destroy')->name('destroy');
                 Route::get('initTable', 'InitTable')->name('initTable');
                 Route::get('tableData', 'TableData')->name('tableData');

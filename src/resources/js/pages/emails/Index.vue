@@ -38,7 +38,7 @@ import EmailForm from './components/EmailForm.vue';
 export default {
     name: 'Index',
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'route'],
 
     components: {
         EnsoTable, EmailForm,
@@ -55,7 +55,7 @@ export default {
     methods: {
         fetch(id) {
             axios.get(
-                route('emails.show', { email: id }),
+                this.route('emails.show', { email: id }),
             ).then(({ data }) => {
                 this.email = data;
             }).catch(this.handleError);

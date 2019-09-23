@@ -80,7 +80,7 @@ import Error from './Error.vue';
 export default {
     name: 'EmailForm',
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'route'],
 
     components: {
         Error, EnsoDatepicker, FileBrowser, PrioritySelector, Recipients,
@@ -111,7 +111,7 @@ export default {
     methods: {
         submit() {
             this.addParams();
-            axios.post(route('emails.send'), this.formData)
+            axios.post(this.route('emails.send'), this.formData)
                 .then(({ data }) => {
                     this.formData = new FormData();
                     this.files = [];
