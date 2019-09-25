@@ -1,6 +1,5 @@
 <template>
-    <span class="tag is-bold is-small"
-        :class="level">
+    <span class="tag is-warning is-bold is-small">
         {{ label }}
     </span>
 </template>
@@ -9,10 +8,10 @@
 import { mapState } from 'vuex';
 
 export default {
-    name: 'Priority',
+    name: 'SendTo',
 
     props: {
-        priority: {
+        sendTo: {
             type: [Number, String],
             required: true,
         },
@@ -21,10 +20,7 @@ export default {
     computed: {
         ...mapState(['enums']),
         label() {
-            return this.enums.emailPriorities._get(this.priority);
-        },
-        level() {
-            return this.enums.emailPriorityLabels._get(this.priority);
+            return this.enums.emailSendTo._get(this.sendTo);
         },
     },
 };

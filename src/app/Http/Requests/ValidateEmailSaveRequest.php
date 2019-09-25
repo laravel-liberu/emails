@@ -2,11 +2,16 @@
 
 namespace LaravelEnso\Emails\app\Http\Requests;
 
+use Illuminate\Validation\Rule;
+use LaravelEnso\Emails\app\Enums\SendTo;
 use Illuminate\Foundation\Http\FormRequest;
 use LaravelEnso\Emails\app\Enums\Priorities;
+use LaravelEnso\Helpers\app\Traits\MapsRequestKeys;
 
-class ValidateEmailDraft extends FormRequest
+class ValidateEmailSaveRequest extends FormRequest
 {
+    use MapsRequestKeys;
+    
     public function authorize()
     {
         return true;
@@ -15,7 +20,7 @@ class ValidateEmailDraft extends FormRequest
     public function rules()
     {
         return [
-            'all' => 'nullable|in:true,false',
+            'sendTo' => 'in:' . SendTo::keys()->implode(','),
             'to' => 'nullable|array',
             'to.*' => 'exists:users,id',
             'cc' => 'nullable|array',

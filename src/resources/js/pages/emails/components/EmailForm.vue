@@ -1,9 +1,19 @@
 <template>
     <div class="notification-form-wrapper box raises-on-hover has-background-light">
-        <recipients class="has-margin-bottom-medium"
-            :email="email"/>
+        <recipients class="has-margin-bottom-large"
+            :email="email"
+            v-if="email.sendTo === parseInt(enums.emailSendTo.Users, 10)"/>
+        <div class="has-margin-bottom-large"
+            v-if="email.sendTo === parseInt(enums.emailSendTo.Teams, 10)">
+            <label class="label">
+                {{ i18n('Teams') }}
+            </label>
+            <enso-select source="administration.teams.options"
+                multiple
+                v-model="email.teams"/>
+        </div>
         <div class="columns">
-            <div class="column is-12">
+            <div class="column is-10">
                 <div>
                     <label class="label">
                         {{ i18n('Subject') }}
@@ -15,6 +25,13 @@
                     <error :message="email.errors.get('subject')"
                         v-if="email.errors.has('subject')"/>
                 </div>
+            </div>
+            <div class="column is-2">
+                <label for="" class="label">
+                    {{ i18n('Send to') }}
+                </label>
+                <send-to-select :value="email.sendTo"
+                    @input="email.sendTo = $event"/>
             </div>
         </div>
         <div class="columns has-margin-bottom-medium">
@@ -30,12 +47,12 @@
                 <error :message="email.errors.get('scheduleAt')"
                     v-if="email.errors.has('scheduleAt')"/>
             </div>
-            <div class="column is-2 has-text-centered">
+            <div class="column is-2">
                 <div>
                     <label class="label">
                         {{ i18n('Priority') }}
                     </label>
-                    <priority-selector :value="email.priority"
+                    <priority-select :value="email.priority"
                         @input="email.priority = $event"/>
                     <error :message="email.errors.get('priority')"
                         v-if="email.errors.has('priority')"/>
@@ -59,9 +76,13 @@
                 @click="cancel()">
                 {{ i18n('Cancel') }}
             </button>
-            <button class="button is-link has-margin-medium"
-                @click="submit()">
-                {{ i18n('Send') }}
+            <button class="button is-warning has-margin-medium"
+                @click="submit('emails.save')">
+                {{ i18n('Save') }}
+            </button>
+            <button class="button is-success has-margin-medium"
+                @click="submit('emails.send')">
+                {{ i18n('Send Now') }}
             </button>
         </div>
     </div>
@@ -70,10 +91,11 @@
 <script>
 
 import { mapState } from 'vuex';
-import { EnsoDatepicker } from '@enso-ui/bulma';
+import { EnsoDatepicker, EnsoSelect } from '@enso-ui/bulma';
 import Errors from '@enso-ui/forms/errors';
 import Recipients from './Recipients.vue';
-import PrioritySelector from './PrioritySelector.vue';
+import PrioritySelect from './PrioritySelect.vue';
+import SendToSelect from './SendToSelect.vue';
 import FileBrowser from './FileBrowser.vue';
 import Error from './Error.vue';
 
@@ -83,7 +105,13 @@ export default {
     inject: ['errorHandler', 'i18n', 'route'],
 
     components: {
-        Error, EnsoDatepicker, FileBrowser, PrioritySelector, Recipients,
+        Error,
+        EnsoDatepicker,
+        FileBrowser,
+        PrioritySelect,
+        Recipients,
+        SendToSelect,
+        EnsoSelect,
     },
 
     props: {
@@ -109,9 +137,9 @@ export default {
     },
 
     methods: {
-        submit() {
-            this.addParams();
-            axios.post(this.route('emails.send'), this.formData)
+        submit(route) {
+            this.appendParams();
+            axios.post(this.route(route), this.formData)
                 .then(({ data }) => {
                     this.formData = new FormData();
                     this.files = [];
@@ -129,25 +157,27 @@ export default {
                 });
         },
 
-        addParams() {
+        appendParams() {
             const skip = ['all', 'errors'];
             Object.keys(this.email).filter(key => !skip.includes(key))
                 .forEach((key) => {
                     if (Array.isArray(this.email[key])) {
-                        this.addRecipients(key, this.email[key]);
+                        this.appendArray(key, this.email[key]);
                     } else {
                         this.formData.append(key, this.email[key] || '');
                     }
                 });
-            this.formData.append('all', !!this.email.all);
+            this.appendFiles();
+        },
+        appendArray(key, array) {
+            array.forEach((id) => {
+                this.formData.append(`${key}[]`, id);
+            });
+        },
+        appendFiles() {
             for (let i = 0; i < this.files.length; i++) {
                 this.formData.append(`file-${i}`, this.files[i]);
             }
-        },
-        addRecipients(key, recipients) {
-            recipients.forEach((id) => {
-                this.formData.append(`${key}[]`, id);
-            });
         },
         cancel() {
             this.formData = new FormData();

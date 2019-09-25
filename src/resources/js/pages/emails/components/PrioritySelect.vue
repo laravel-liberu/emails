@@ -1,9 +1,7 @@
 <template>
     <dropdown class="status-selector">
         <template v-slot:label>
-            <span>
-                <priority :priority="value"/>
-            </span>
+            <priority :priority="value"/>
         </template>
         <template v-slot:options>
             <a v-for="priority in enums.emailPriorities._keys()"
@@ -23,7 +21,7 @@ import { Dropdown } from '@enso-ui/bulma';
 import Priority from './Priority.vue';
 
 export default {
-    name: 'PrioritySelector',
+    name: 'PrioritySelect',
 
     components: { Dropdown, Priority },
 

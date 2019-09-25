@@ -4,6 +4,7 @@ namespace LaravelEnso\Emails\app\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
+use LaravelEnso\Emails\app\Enums\SendTo;
 use Illuminate\Foundation\Http\FormRequest;
 use LaravelEnso\Emails\app\Enums\Priorities;
 use LaravelEnso\Helpers\app\Traits\MapsRequestKeys;
@@ -20,13 +21,15 @@ class ValidateEmailSendRequest extends FormRequest
     public function rules()
     {
         return [
-            'all' => 'in:true,false',
+            'sendTo' => 'in:' . SendTo::keys()->implode(','),
             'to' => 'nullable|array',
             'to.*' => 'exists:users,id',
             'cc' => 'nullable|array',
             'cc.*' => 'exists:users,id',
             'bcc' => 'nullable|array',
             'bcc.*' => 'exists:users,id',
+            'teams' => 'nullable|array',
+            'teams.*' => 'exists:users,id',
             'subject' => 'required|string|max:255',
             'body' => 'nullable|string',
             'scheduleAt' => 'nullable|date_format:d-m-Y H:i',

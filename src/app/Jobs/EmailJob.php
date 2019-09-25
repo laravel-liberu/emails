@@ -24,7 +24,6 @@ class EmailJob implements ShouldQueue
     {
         $this->queue = 'heavy';
         $this->timeout = 100;
-
         $this->email = $email;
     }
 

@@ -32,7 +32,6 @@
 
 import { mapState } from 'vuex';
 import { EnsoTable } from '@enso-ui/bulma';
-// import Errors from '@enso-ui/forms/errors';
 import EmailForm from './components/EmailForm.vue';
 
 export default {
@@ -66,7 +65,8 @@ export default {
                 to: [],
                 cc: [],
                 bcc: [],
-                all: false,
+                teams: [],
+                sendTo: this.enums.emailSendTo.Users,
                 subject: null,
                 body: null,
                 scheduleAt: null,
