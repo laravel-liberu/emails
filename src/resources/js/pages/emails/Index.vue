@@ -66,7 +66,7 @@ export default {
                 cc: [],
                 bcc: [],
                 teams: [],
-                sendTo: this.enums.emailSendTo.Users,
+                sendTo: parseInt(this.enums.emailSendTo.Users, 10),
                 subject: null,
                 body: null,
                 scheduleAt: null,
