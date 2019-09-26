@@ -11,6 +11,7 @@ class Show extends Controller
     public function __invoke(Email $email)
     {
         $email->load(['cc', 'to', 'bcc', 'attachments.file']);
+        
         return new Resource($email);
     }
 }

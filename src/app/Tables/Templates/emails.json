@@ -18,6 +18,8 @@
             "type": "global",
             "class": "is-button",
             "event": "compose",
+            "action": "router",
+            "routeSuffix": "create",
             "label": "Compose"
         }
     ],

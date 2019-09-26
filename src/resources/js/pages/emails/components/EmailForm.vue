@@ -13,7 +13,7 @@
                 v-model="email.teams"/>
         </div>
         <div class="columns">
-            <div class="column is-10">
+            <div class="column">
                 <div>
                     <label class="label">
                         {{ i18n('Subject') }}
@@ -26,16 +26,9 @@
                         v-if="email.errors.has('subject')"/>
                 </div>
             </div>
-            <div class="column is-2">
-                <label for="" class="label">
-                    {{ i18n('Send to') }}
-                </label>
-                <send-to-select :value="email.sendTo"
-                    @input="email.sendTo = $event"/>
-            </div>
         </div>
         <div class="columns has-margin-bottom-medium">
-            <div class="column is-10 has-text-left">
+            <div class="column is-8 has-text-left">
                 <label class="label">
                     {{ i18n('Schedule At') }}
                 </label>
@@ -46,6 +39,13 @@
                     @input="email.errors.clear('scheduleAt')"/>
                 <error :message="email.errors.get('scheduleAt')"
                     v-if="email.errors.has('scheduleAt')"/>
+            </div>
+            <div class="column is-2">
+                <label for="" class="label">
+                    {{ i18n('Send to') }}
+                </label>
+                <send-to-select :value="email.sendTo"
+                    @input="email.sendTo = $event"/>
             </div>
             <div class="column is-2">
                 <div>
