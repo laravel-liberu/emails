@@ -76,7 +76,7 @@
                 @click="cancel()">
                 {{ i18n('Cancel') }}
             </button>
-            <button class="button is-warning has-margin-medium"
+            <button class="button is-primary has-margin-medium"
                 @click="submit('emails.save')">
                 {{ i18n('Save') }}
             </button>
