@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use LaravelEnso\Emails\app\Services\MailManager;
 use LaravelEnso\Emails\app\Http\Requests\ValidateEmailSaveRequest;
 
-class Save extends Controller
+class Store extends Controller
 {
     public function __invoke(ValidateEmailSaveRequest $request, Email $email)
     {
@@ -15,6 +15,8 @@ class Save extends Controller
         
         return [
             'message' => __('The email was successfully saved!'),
+            'redirect' => 'emails.show',
+            'params' => ['email' => $email->id],
         ];
     }
 }

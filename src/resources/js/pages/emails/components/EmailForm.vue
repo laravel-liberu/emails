@@ -77,12 +77,18 @@
                 {{ i18n('Cancel') }}
             </button>
             <button class="button is-primary has-margin-medium"
-                @click="submit('emails.save')">
+                v-if="email.status === parseInt(enums.emailStatuses.Draft, 10)"
+                @click="submit('emails.store')">
                 {{ i18n('Save') }}
             </button>
             <button class="button is-success has-margin-medium"
                 @click="submit('emails.send')">
-                {{ i18n('Send Now') }}
+                <span v-if="email.status === parseInt(enums.emailStatuses.Sent, 10)">
+                    {{ i18n('Resend') }}
+                </span>
+                <span v-else>
+                    {{ i18n('Send now') }}
+                </span>
             </button>
         </div>
     </div>
@@ -183,6 +189,9 @@ export default {
             this.formData = new FormData();
             this.fiels = [];
             this.$emit('cancel');
+            this.$router.push({
+                name: 'emails.index',
+            });
         },
     },
 };

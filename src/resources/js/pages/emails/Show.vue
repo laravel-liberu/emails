@@ -7,11 +7,14 @@
 </template>
 
 <script>
+import EmailForm from './components/EmailForm.vue';
 
 export default {
     name: 'Show',
 
-    props: {},
+    components: { EmailForm },
+
+    inject: ['route'],
 
     data: () => ({
         email: null,

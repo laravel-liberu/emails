@@ -11,6 +11,7 @@ class Email extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'priority' => $this->priority,
             'subject' => $this->subject,
             'body' => $this->body,
@@ -22,6 +23,7 @@ class Email extends JsonResource
             'bcc' => $this->whenLoaded('bcc', $this->bcc->pluck('id')),
             'sendTo' => SendTo::Users,
             'teams' => [],
+            'status' => $this->status,
             'errors' => null,
         ];
     }
