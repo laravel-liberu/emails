@@ -12,7 +12,7 @@ use LaravelEnso\Enums\EnumServiceProvider as ServiceProvider;
 
 class EnumServiceProvider extends ServiceProvider
 {
-    protected $register = [
+    public $register = [
         'emailStatuses' => Statuses::class,
         'emailSendTo' => SendTo::class,
         'emailPriorities' => Priorities::class,
