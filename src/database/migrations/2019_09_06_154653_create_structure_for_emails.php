@@ -16,7 +16,7 @@ class CreateStructureForEmails extends Migration
     ];
 
     protected $menu = [
-        'name' => 'Emails', 'icon' => 'paper-plane', 'route' => 'emails.index', 'order_index' => 30, 'has_children' => false
+        'name' => 'Emails', 'icon' => 'paper-plane', 'route' => 'emails.index', 'order_index' => 250, 'has_children' => false
     ];
 
     protected $parentMenu = '';
