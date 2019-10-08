@@ -152,8 +152,6 @@ export default {
                     this.files = [];
                     this.$emit('submit');
                     this.$toastr.success(data.message);
-                    console.log(this.$route.name);
-                    console.log(redirect);
                     if (redirect && this.$route.name !== redirect) {
                         this.$router.push({
                             name: 'emails.edit',
