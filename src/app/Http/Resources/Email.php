@@ -24,6 +24,7 @@ class Email extends JsonResource
             'sendTo' => SendTo::Users,
             'teams' => [],
             'status' => $this->status,
+            'files' => $this->whenLoaded('attachments', $this->attachments->files)
             'errors' => null,
         ];
     }

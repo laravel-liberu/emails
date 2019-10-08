@@ -10,7 +10,7 @@
 import EmailForm from './components/EmailForm.vue';
 
 export default {
-    name: 'Show',
+    name: 'Edit',
 
     components: { EmailForm },
 
@@ -27,7 +27,7 @@ export default {
     methods: {
         fetch() {
             axios.get(
-                this.route('emails.show', this.$route.params),
+                this.route('emails.edit', this.$route.params),
             ).then(({ data }) => {
                 this.email = data;
             }).catch(this.handleError);

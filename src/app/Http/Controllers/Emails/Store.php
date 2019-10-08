@@ -11,11 +11,15 @@ class Store extends Controller
 {
     public function __invoke(ValidateEmailSaveRequest $request, Email $email)
     {
-        (new MailManager($email, $request))->save();
+        if($request->get('id')) {
+            $email->update($request->validated());
+        } else {
+            (new MailManager($email, $request))->save();
+        }
         
         return [
             'message' => __('The email was successfully saved!'),
-            'redirect' => 'emails.show',
+            'redirect' => 'emails.edit',
             'params' => ['email' => $email->id],
         ];
     }

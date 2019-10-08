@@ -7,20 +7,20 @@
     "crtNo": true,
     "buttons": [
         {
-            "icon": "eye",
+            "icon": "pencil-alt",
             "type": "row",
             "class": "is-row-button",
-            "event": "show"
+            "event": "edit"
         },
         "destroy", 
         {
-            "icon": "pencil-alt",
+            "icon": "plus",
             "type": "global",
             "class": "is-button",
-            "event": "compose",
+            "event": "create",
             "action": "router",
             "routeSuffix": "create",
-            "label": "Compose"
+            "label": "Create"
         }
     ],
     "columns": [

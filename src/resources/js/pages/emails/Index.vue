@@ -1,7 +1,7 @@
 <template>
     <enso-table class="box is-paddingless raises-on-hover"
         id="emails"
-        @show="show($event.id)">
+        @edit="edit($event.id)">
         <template v-slot:priority="{ row }">
             <span class="tag is-table-tag has-margin-right-small"
                 :class="enums.emailPriorityLabels._get(row.priority)">
@@ -40,9 +40,9 @@ export default {
     },
 
     methods: {
-        show(id) {
+        edit(id) {
             this.$router.push({
-                name: 'emails.show',
+                name: 'emails.edit',
                 params: { email: id },
             });
         },

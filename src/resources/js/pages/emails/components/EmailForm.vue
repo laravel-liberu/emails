@@ -147,10 +147,19 @@ export default {
             this.appendParams();
             axios.post(this.route(route), this.formData)
                 .then(({ data }) => {
+                    const { params, redirect } = data;
                     this.formData = new FormData();
                     this.files = [];
                     this.$emit('submit');
                     this.$toastr.success(data.message);
+                    console.log(this.$route.name);
+                    console.log(redirect);
+                    if (redirect && this.$route.name !== redirect) {
+                        this.$router.push({
+                            name: 'emails.edit',
+                            params,
+                        });
+                    }
                 }).catch((error) => {
                     const { status, data } = error.response;
                     this.formData = new FormData();
