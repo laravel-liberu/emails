@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class ScheduleEmailJob implements ShouldQueue
+class ScheduleEmails implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -24,7 +24,6 @@ class ScheduleEmailJob implements ShouldQueue
 
     public function handle()
     {
-        \Log::info(1212);
         Email::whereNull('sent_at')
             ->whereBetween('schedule_at', [Carbon::now(), Carbon::now()->addMinutes(3)])
             ->get()->each->send();

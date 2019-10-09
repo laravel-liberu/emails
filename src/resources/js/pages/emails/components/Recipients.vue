@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { EnsoSelect } from '@enso-ui/bulma';
+import { EnsoSelect } from '@enso-ui/select/bulma';
 import Error from './Error.vue';
 
 export default {

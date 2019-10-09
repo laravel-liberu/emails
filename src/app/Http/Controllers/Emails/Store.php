@@ -5,17 +5,13 @@ namespace LaravelEnso\Emails\app\Http\Controllers\Emails;
 use LaravelEnso\Emails\app\Email;
 use Illuminate\Routing\Controller;
 use LaravelEnso\Emails\app\Services\MailManager;
-use LaravelEnso\Emails\app\Http\Requests\ValidateEmailSaveRequest;
+use LaravelEnso\Emails\app\Http\Requests\ValidateEmailRequest;
 
 class Store extends Controller
 {
-    public function __invoke(ValidateEmailSaveRequest $request, Email $email)
+    public function __invoke(ValidateEmailRequest $request, Email $email)
     {
-        if($request->get('id')) {
-            $email->update($request->validated());
-        } else {
-            (new MailManager($email, $request))->save();
-        }
+        (new MailManager($email, $request))->save();
         
         return [
             'message' => __('The email was successfully saved!'),

@@ -17,7 +17,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Dropdown } from '@enso-ui/bulma';
+import Dropdown from '@enso-ui/dropdown/bulma';
 import Priority from './Priority.vue';
 
 export default {

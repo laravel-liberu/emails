@@ -20,11 +20,11 @@ Emails package is an extesion of the Laravel Enso enviroment, designed for sendi
     protected function schedule(Schedule $schedule)
     {
         //other stuff
-        $schedule->job(new ScheduleEmailJob)->everyMinute();
+        $schedule->job(new ScheduleEmails)->everyMinute();
     }
     ...
 ```
-* Also make sure that `ScheduleEmailJob` class is imported.
+* Also make sure that `ScheduleEmails` class is imported.
 
 **NOTE** *For local schedule testing, you must first run the command:*
 ```

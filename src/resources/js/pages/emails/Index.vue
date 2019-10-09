@@ -20,7 +20,7 @@
 <script>
 
 import { mapState } from 'vuex';
-import { EnsoTable } from '@enso-ui/bulma';
+import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
     name: 'Index',

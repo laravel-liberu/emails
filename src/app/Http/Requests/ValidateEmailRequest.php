@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use LaravelEnso\Emails\app\Enums\Priorities;
 use LaravelEnso\Helpers\app\Traits\MapsRequestKeys;
 
-class ValidateEmailSaveRequest extends FormRequest
+class ValidateEmailRequest extends FormRequest
 {
     use MapsRequestKeys;
     

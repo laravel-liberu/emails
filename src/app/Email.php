@@ -4,9 +4,9 @@ namespace LaravelEnso\Emails\app;
 
 use Illuminate\Support\Facades\DB;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Emails\Jobs\EmailJob;
 use LaravelEnso\Teams\app\Models\Team;
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Emails\Jobs\SendEmails;
 use LaravelEnso\Emails\app\Enums\SendTo;
 use LaravelEnso\Emails\app\Enums\Statuses;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
@@ -136,7 +136,7 @@ class Email extends Model
 
     public function send()
     {
-        EmailJob::dispatch($this);
+        SendEmails::dispatch($this);
     }
 
     public function delete()

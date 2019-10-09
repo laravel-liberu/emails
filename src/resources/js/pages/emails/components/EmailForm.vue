@@ -71,25 +71,25 @@
                 v-if="email.errors.has('body')"/>
         </div>
         <file-browser @input="files = $event"/>
-        <div class="has-text-right">
-            <button class="button has-margin-medium"
-                @click="cancel()">
-                {{ i18n('Cancel') }}
-            </button>
-            <button class="button is-primary has-margin-medium"
-                v-if="email.status === parseInt(enums.emailStatuses.Draft, 10)"
-                @click="submit('emails.store')">
-                {{ i18n('Save') }}
-            </button>
-            <button class="button is-success has-margin-medium"
-                @click="submit('emails.send')">
-                <span v-if="email.status === parseInt(enums.emailStatuses.Sent, 10)">
-                    {{ i18n('Resend') }}
-                </span>
-                <span v-else>
-                    {{ i18n('Send now') }}
-                </span>
-            </button>
+        <div class="level">
+            <div class="level-right"/>
+            <div class="level-left">
+                <action tag="button"
+                    :button="{label: 'Back', icon: 'arrow-left'}"
+                    @click="back()"/>
+                <action tag="button"
+                    :button="{label: 'Save', class: 'is-primary', icon: 'check'}"
+                    v-if="email.status === parseInt(enums.emailStatuses.Draft, 10)"
+                    @click="submit('emails.store', 'post')"/>
+                <action tag="button"
+                    :button="{label: 'Resend', class: 'is-success', icon: 'paper-plane'}"
+                    v-if="email.status === parseInt(enums.emailStatuses.Sent, 10)"
+                    @click="submit('emails.send', 'post')"/>
+                <action tag="button"
+                    :button="{label: 'Send Now', class: 'is-success', icon: 'paper-plane'}"
+                    v-else
+                    @click="submit('emails.send', 'post')"/>
+            </div>
         </div>
     </div>
 </template>
@@ -97,7 +97,9 @@
 <script>
 
 import { mapState } from 'vuex';
-import { EnsoDatepicker, EnsoSelect } from '@enso-ui/bulma';
+import { EnsoDatepicker } from '@enso-ui/datepicker/bulma';
+import { EnsoSelect } from '@enso-ui/select/bulma';
+import { Action } from '@enso-ui/forms/bulma';
 import Errors from '@enso-ui/forms/errors';
 import Recipients from './Recipients.vue';
 import PrioritySelect from './PrioritySelect.vue';
@@ -118,6 +120,7 @@ export default {
         Recipients,
         SendToSelect,
         EnsoSelect,
+        Action,
     },
 
     props: {
@@ -143,31 +146,30 @@ export default {
     },
 
     methods: {
-        submit(route) {
+        submit(route, method) {
             this.appendParams();
-            axios.post(this.route(route), this.formData)
-                .then(({ data }) => {
-                    const { params, redirect } = data;
-                    this.formData = new FormData();
-                    this.files = [];
-                    this.$emit('submit');
-                    this.$toastr.success(data.message);
-                    if (redirect && this.$route.name !== redirect) {
-                        this.$router.push({
-                            name: 'emails.edit',
-                            params,
-                        });
-                    }
-                }).catch((error) => {
-                    const { status, data } = error.response;
-                    this.formData = new FormData();
-                    if (status === 422) {
-                        this.email.errors.set(data.errors);
-                        return;
-                    }
-                    this.$emit('submission-error');
-                    this.errorHandler(error);
-                });
+            axios[method](
+                this.route(route, { email: this.email.id }),
+                this.formData,
+            ).then(({ data }) => {
+                const { params, redirect } = data;
+                this.formData = new FormData();
+                this.files = [];
+                this.$emit('submit');
+                this.$toastr.success(data.message);
+                if (redirect) {
+                    this.$router.push({ name: redirect, params });
+                }
+            }).catch((error) => {
+                const { status, data } = error.response;
+                this.formData = new FormData();
+                if (status === 422) {
+                    this.email.errors.set(data.errors);
+                    return;
+                }
+                this.$emit('submission-error');
+                this.errorHandler(error);
+            });
         },
 
         appendParams() {
@@ -192,7 +194,7 @@ export default {
                 this.formData.append(`file-${i}`, this.files[i]);
             }
         },
-        cancel() {
+        back() {
             this.formData = new FormData();
             this.fiels = [];
             this.$emit('cancel');
