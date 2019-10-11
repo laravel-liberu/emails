@@ -7,7 +7,6 @@ use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Teams\app\Models\Team;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Emails\Jobs\SendEmails;
-use LaravelEnso\Emails\app\Enums\SendTo;
 use LaravelEnso\Emails\app\Enums\Statuses;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 use LaravelEnso\Emails\app\Enums\RecipientTypes;
@@ -48,10 +47,38 @@ class Email extends Model
     {
         return $this->users()->whereType(RecipientTypes::Bcc);
     }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
    
     public function attachments()
     {
-        return $this->morphMany(Attachment::class, 'attachable');
+        return $this->morphMany(EmailAttachment::class, 'attachable');
+    }
+
+    public function uploadAttachments($files)
+    {
+        collect($files)->each(function ($file) {
+            $attachment = $this->attachments()->create();
+            $attachment->upload($file);
+        });
+    }
+
+    private function syncAll()
+    {
+        $this->users()->sync(
+            $this->buildPivot(
+                User::active()->pluck('id')->toArray(),
+                RecipientTypes::To
+            )
+        );
+    }
+
+    public function send()
+    {
+        SendEmails::dispatch($this);
     }
 
     public function setScheduleAtAttribute($value)
@@ -71,72 +98,6 @@ class Email extends Model
         }
 
         return $this->sent_at ? Statuses::Sent : Statuses::Scheduled;
-    }
-
-    public function uploadAttachments($files)
-    {
-        collect($files)->each(function ($file) {
-            $attachment = $this->attachments()->create();
-            $attachment->upload($file);
-        });
-    }
-
-    public function syncRecipients($sendTo, $to, $cc, $bcc, $teams)
-    {
-        switch ((int)$sendTo) {
-            case SendTo::Users:
-                $this->syncUsers($to, $cc, $bcc);
-                break;
-            case SendTo::Teams:
-                $this->syncTeams($teams);
-                break;
-            case SendTo::All:
-                $this->syncAll();
-                break;
-        }
-    }
-
-    private function syncUsers($to, $cc, $bcc)
-    {
-        collect([
-            RecipientTypes::To => $to, RecipientTypes::Cc => $cc, RecipientTypes::Bcc => $bcc,
-        ])->each(function ($ids, $type) {
-            $this->users()->syncWithoutDetaching($this->buildPivot($ids, $type));
-        });
-    }
-
-    private function syncTeams($teamIds)
-    {
-        Team::whereIn('id', $teamIds)->with('users')
-            ->get()->each(function($team) {
-                $this->users()->syncWithoutDetaching(
-                    $this->buildPivot(
-                        $team->users->pluck('id')->toArray(), RecipientTypes::To)
-                    );
-            });
-    }
-
-    private function syncAll()
-    {
-        $this->users()->sync(
-            $this->buildPivot(
-                User::active()->pluck('id')->toArray(),
-                RecipientTypes::To
-            )
-        );
-    }
-    
-    private function buildPivot($toSync, $type)
-    {
-        return collect($toSync)
-            ->reduce(function ($pivot, $id) use ($type) {
-                return $pivot->put($id, ['type' => $type]);
-            }, collect());
-    }
-
-    public function send()
-    {
-        SendEmails::dispatch($this);
     }
 
     public function delete()

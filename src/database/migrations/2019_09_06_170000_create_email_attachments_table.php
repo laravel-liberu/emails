@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttachmentsTable extends Migration
+class CreateEmailAttachmentsTable extends Migration
 {
     public function up()
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('email_attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('attachable');
             $table->timestamps();
@@ -17,6 +17,6 @@ class CreateAttachmentsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('attachments');
+        Schema::dropIfExists('email_attachments');
     }
 }

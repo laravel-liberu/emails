@@ -7,12 +7,12 @@
                 ref="browser"
                 @change="$emit('input', $refs.browser.files); files = $refs.browser.files">
             <span class="file-cta">
-            <span class="file-icon">
-                <i class="fas fa-upload"/>
-            </span>
-            <span class="file-label">
-                {{ 'Attach some files...' }}
-            </span>
+                <span class="file-icon">
+                    <i class="fas fa-paperclip"/>
+                </span>
+                <span class="file-label">
+                    {{ 'Attach some files...' }}
+                </span>
             </span>
             <span class="file-name has-background-white"
                 v-for="file in files"

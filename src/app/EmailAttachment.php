@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Files\app\Traits\HasFile;
 use LaravelEnso\Files\app\Contracts\Attachable;
 
-class Attachment extends Model implements Attachable
+class EmailAttachment extends Model implements Attachable
 {
     use HasFile;
     

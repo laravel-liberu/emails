@@ -8,17 +8,19 @@ class CreateEmailUserPivotTable extends Migration
     public function up()
     {
         Schema::create('email_recipients', function (Blueprint $table) {
-            $table->increments('id');
+            $table->unsignedInteger('email_id');
+            $table->foreign('email_id')->references('id')->on('emails')
+                ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->integer('email_id')->unsigned();
-            $table->foreign('email_id')->references('id')->on('emails');
-
-            $table->integer('recipient_id')->unsigned();
-            $table->foreign('recipient_id')->references('id')->on('users');
+            $table->unsignedInteger('recipient_id');
+            $table->foreign('recipient_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
 
             $table->tinyInteger('type')->unsigned();
 
             $table->timestamps();
+
+            $table->primary(['email_id', 'recipient_id']);
         });
     }
 

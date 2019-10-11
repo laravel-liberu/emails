@@ -25,7 +25,8 @@
         "laravel-enso/forms": "3.2.*",
         "laravel-enso/helpers": "1.12.*",
         "laravel-enso/select": "3.2.*",
-        "laravel-enso/tables": "2.2.*"
+        "laravel-enso/tables": "2.2.*",
+        "laravel-enso/teams": "2.1.*"
     },
     "autoload": {
         "psr-4": {
