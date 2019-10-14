@@ -13,12 +13,13 @@ class CreateEmailsTable extends Migration
 
             $table->string('subject');
             $table->text('body')->nullable();
-            $table->tinyInteger('priority')->unsigned();
+            $table->unsignedTinyInteger('priority');
+            $table->unsignedTinyInteger('send_to');
 
             $table->dateTime('schedule_at')->nullable();
             $table->dateTime('sent_at')->nullable();
 
-            $table->integer('created_by')->unsigned();
+            $table->unsignedInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users');
 
             $table->timestamps();

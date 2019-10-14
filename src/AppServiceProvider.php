@@ -2,6 +2,9 @@
 
 namespace LaravelEnso\Emails;
 
+use LaravelEnso\Emails\app\Email;
+use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Teams\app\Models\Team;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -9,6 +12,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->load();
+        $this->loadMethods();
         $this->publish();
     }
 
@@ -17,6 +21,22 @@ class AppServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->mergeConfigFrom(__DIR__.'/config/emails.php', 'emails');
+    }
+
+    private function loadMethods()
+    {
+        Team::addDynamicMethod('emails', function () {
+            return $this->belongsToMany(Email::class);
+        });
+
+        User::addDynamicMethod('emails', function() {
+            return $this->belongsToMany(
+                Email::class,
+                'email_recipients',
+                'email_id',
+                'recipient_id'
+            )->withPivot('type');
+        });
     }
 
     private function publish()

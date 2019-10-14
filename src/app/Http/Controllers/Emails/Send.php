@@ -11,10 +11,12 @@ class Send extends Controller
 {
     public function __invoke(ValidateEmailSendRequest $request, Email $email)
     {
+        \Log::info($request->all());
         (new MailManager($email, $request))->send();
 
         return [
             'message' => __('The email was succesfully sent!'),
+            'redirect' => 'emails.index',
         ];
     }
 }

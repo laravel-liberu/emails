@@ -8,7 +8,7 @@ Route::middleware(['web', 'auth', 'core'])
                 Route::post('', 'Store')->name('store');
                 Route::get('create', 'Create')->name('create');
                 Route::get('{email}/edit', 'Edit')->name('edit');
-                Route::patch('{email}', 'Update')->name('update');
+                Route::post('{email}/update', 'Update')->name('update');
                 Route::delete('{email}', 'Destroy')->name('destroy');
                 Route::get('initTable', 'InitTable')->name('initTable');
                 Route::get('tableData', 'TableData')->name('tableData');

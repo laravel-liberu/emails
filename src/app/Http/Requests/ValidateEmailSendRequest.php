@@ -40,7 +40,7 @@ class ValidateEmailSendRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if ($this->get('all') === 'false') {
+            if ((int)$this->get('sendTo') === SendTo::Users) {
                 $this->checkRecipients(
                     $validator,
                     $this->get('to'),
@@ -86,8 +86,7 @@ class ValidateEmailSendRequest extends FormRequest
     {
         return $this->get('scheduleAt')
             ? Carbon::createFromFormat(
-                'd-m-Y H:i',
-                $this->get('scheduleAt')
+                'd-m-Y H:i', $this->get('scheduleAt')
             )->isBefore(Carbon::now())
             : false;
     }

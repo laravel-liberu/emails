@@ -43,6 +43,7 @@ export default {
                 scheduleAt: null,
                 priority: this.enums.emailPriorities.Low,
                 status: parseInt(this.enums.emailStatuses.Draft, 10),
+                files: [],
                 errors: null,
             };
         },

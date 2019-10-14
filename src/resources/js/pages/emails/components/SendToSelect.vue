@@ -1,5 +1,6 @@
 <template>
-    <dropdown class="status-selector">
+    <dropdown class="status-selector"
+        v-bind="$attrs">
         <template v-slot:label>
             <send-to :send-to="value"/>
         </template>

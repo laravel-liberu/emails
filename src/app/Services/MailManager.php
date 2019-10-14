@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Emails\app\Services;
 
+use App\User;
 use LaravelEnso\Emails\app\Email;
 use LaravelEnso\Emails\app\Enums\SendTo;
 use LaravelEnso\Emails\app\Enums\RecipientTypes;
@@ -26,9 +27,7 @@ class MailManager
 
     public function send()
     {
-        if(!$this->email->id) {
-            $this->save();
-        }
+        $this->save();
         $this->email->send();
     }
 
@@ -47,8 +46,8 @@ class MailManager
             case SendTo::Teams:
                 $this->email->teams()->sync($this->request->get('teams'));
                 break;
-            case SenTo::All():
-                $this->email->syncAll();
+            case SendTo::All:
+                $this->email->users()->sync($this->all());
                 break;
             default:
                 throw new EnsoException('Invalid send to option!');
@@ -66,6 +65,14 @@ class MailManager
         ])->mapWithKeys(function($ids, $type) {
             return $this->buildPivot($ids, $type);
         })->filter();
+    }
+
+    private function all()
+    {
+        return $this->buildPivot(
+            User::pluck('id')->toArray(),
+            RecipientTypes::To,
+        );
     }
 
     private function buildPivot($toSync, $type)

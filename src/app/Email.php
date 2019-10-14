@@ -17,7 +17,7 @@ class Email extends Model
     use DateAttributes, CreatedBy;
 
     protected $fillable = [
-        'subject', 'body', 'priority', 'schedule_at',
+        'subject', 'body', 'priority', 'send_to', 'schedule_at',
         'sent_at', 'created_by',
     ];
 
@@ -66,16 +66,6 @@ class Email extends Model
         });
     }
 
-    private function syncAll()
-    {
-        $this->users()->sync(
-            $this->buildPivot(
-                User::active()->pluck('id')->toArray(),
-                RecipientTypes::To
-            )
-        );
-    }
-
     public function send()
     {
         SendEmails::dispatch($this);
@@ -98,6 +88,13 @@ class Email extends Model
         }
 
         return $this->sent_at ? Statuses::Sent : Statuses::Scheduled;
+    }
+
+    public function getAttachedFilesAttribute()
+    {
+        return $this->attachments->map(function($attachment) {
+            return ['name' => $attachment->file->original_name];
+        });
     }
 
     public function delete()

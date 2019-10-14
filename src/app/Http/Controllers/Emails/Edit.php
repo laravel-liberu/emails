@@ -10,7 +10,9 @@ class Edit extends Controller
 {
     public function __invoke(Email $email)
     {
-        $email->load(['cc', 'to', 'bcc', 'attachments.file']);
+        $email->load([
+            'cc', 'to', 'bcc', 'teams', 'attachments.file', 
+        ]);
         
         return new Resource($email);
     }

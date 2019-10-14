@@ -13,6 +13,7 @@
                     placeholder="Select recipients"
                     source="administration.users.options"
                     label="person.name"
+                    :readonly="email.status == enums.emailStatuses.Sent"
                     v-model="email.to"
                     @input="email.errors.clear('to')"/>
                 <error :message="email.errors.get('to')"
@@ -32,6 +33,7 @@
                     placeholder="Select recipients"
                     source="administration.users.options"
                     label="person.name"
+                    :readonly="email.status == enums.emailStatuses.Sent"
                     v-model="email.cc"
                     @input="email.errors.clear('cc')"/>
                 <error :message="email.errors.get('cc')"
@@ -52,6 +54,7 @@
                     source="administration.users.options"
                     label="person.name"
                     v-model="email.bcc"
+                    :readonly="email.status == enums.emailStatuses.Sent"
                     @input="email.errors.clear('bcc')"/>
                 <error :message="email.errors.get('bcc')"
                     v-if="email.errors.has('bcc')"/>
@@ -61,6 +64,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { EnsoSelect } from '@enso-ui/select/bulma';
 import Error from './Error.vue';
 
@@ -78,6 +82,10 @@ export default {
             type: Object,
             required: true,
         },
+    },
+
+    computed: {
+        ...mapState(['enums']),
     },
 };
 
