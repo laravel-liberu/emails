@@ -92,7 +92,7 @@ class Email extends Model
 
     public function getAttachedFilesAttribute()
     {
-        return $this->attachments->map(function($attachment) {
+        return $this->attachments->map(function ($attachment) {
             return ['name' => $attachment->file->original_name];
         });
     }
@@ -100,10 +100,10 @@ class Email extends Model
     public function delete()
     {
         DB::beginTransaction();
-            $this->to()->detach();
-            $this->bcc()->detach();
-            $this->cc()->detach();
-            $this->attachments->each->delete();
+        $this->to()->detach();
+        $this->bcc()->detach();
+        $this->cc()->detach();
+        $this->attachments->each->delete();
         DB::commit();
         parent::delete();
     }

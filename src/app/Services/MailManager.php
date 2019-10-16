@@ -85,6 +85,7 @@ class MailManager
 
     private function syncAttachments()
     {
+        \Log::info($this->request->allFiles());
         try {
             $this->email->attachments->each->delete();
             $this->email->uploadAttachments(
