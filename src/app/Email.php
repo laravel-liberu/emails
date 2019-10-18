@@ -8,13 +8,14 @@ use LaravelEnso\Teams\app\Models\Team;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Emails\Jobs\SendEmails;
 use LaravelEnso\Emails\app\Enums\Statuses;
+use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 use LaravelEnso\Emails\app\Enums\RecipientTypes;
 use LaravelEnso\Helpers\app\Traits\DateAttributes;
 
 class Email extends Model
 {
-    use DateAttributes, CreatedBy;
+    use DateAttributes, CreatedBy, TableCache;
 
     protected $fillable = [
         'subject', 'body', 'priority', 'send_to', 'schedule_at',

@@ -3,13 +3,14 @@
 namespace LaravelEnso\Emails\app\Tables\Builders;
 
 use LaravelEnso\Emails\app\Email;
-use LaravelEnso\Tables\app\Services\Table;
+use Illuminate\Database\Eloquent\Builder;
+use LaravelEnso\Tables\app\Contracts\Table;
 
-class EmailTable extends Table
+class EmailTable implements Table
 {
-    protected $templatePath = __DIR__.'/../Templates/emails.json';
+    protected const TemplatePath = __DIR__.'/../Templates/emails.json';
 
-    public function query()
+    public function query() : Builder
     {
         return Email::selectRaw('
             emails.id,
@@ -18,5 +19,10 @@ class EmailTable extends Table
             people.name as createdBy
         ')->join('users', 'emails.created_by', '=', 'users.id')
         ->join('people', 'users.person_id', '=', 'people.id');
+    }
+
+    public function templatePath(): string
+    {
+        return static::TemplatePath;
     }
 }
