@@ -10,10 +10,10 @@ Emails package is an extesion of the Laravel Enso enviroment, designed for sendi
 * attachments manangement
 * email scheduling management
 * email priority
-* includes front-end assets
 
 ### Instalation
 * install the package using composer: `composer require laravel-enso/emails`
+* install the front-end assets using yarn/npm: `yarn add @enso-ui/emails`
 * add the following line in `schedule` function in `app\Console\Kernel.php` class:
 ```
     ...
@@ -37,7 +37,7 @@ php artisan schedule:run
             extensions: ['.js', '.vue', '.json'],
             alias: {
                  //other aliases
-                '@emails': `${__dirname}/vendor/laravel-enso/emails/src/resources/js`,
+                '@emails': `${__dirname}/node_modules/@enso-ui/emails/src/bulma`
             },
         },
     })
