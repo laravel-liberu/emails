@@ -1,5 +1,13 @@
 # Emails
 
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff415bb65927479a80d173622d3c11ed)](https://www.codacy.com/app/laravel-enso/emails?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/emails&amp;utm_campaign=Badge_Grade)
+[![StyleCI](https://github.styleci.io/repos/134861936/shield?branch=master)](https://github.styleci.io/repos/134861936)
+[![License](https://poser.pugx.org/laravel-enso/emails/license)](https://packagist.org/packages/laravel-enso/emails)
+[![Total Downloads](https://poser.pugx.org/laravel-enso/emails/downloads)](https://packagist.org/packages/laravel-enso/emails)
+[![Latest Stable Version](https://poser.pugx.org/laravel-enso/emails/version)](https://packagist.org/packages/laravel-enso/emails)
+
+
 Emails package is an extesion of the Laravel Enso enviroment, designed for sending emails/notifications.
 
 **Note:** *This package cannot be used outside of enso enviroment and is not included in [Laravel Enso Core](https://github.com/laravel-enso/Core) packages.*
