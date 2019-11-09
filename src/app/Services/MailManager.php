@@ -4,8 +4,8 @@ namespace LaravelEnso\Emails\app\Services;
 
 use App\User;
 use LaravelEnso\Emails\app\Email;
-use LaravelEnso\Emails\app\Enums\SendTo;
 use LaravelEnso\Emails\app\Enums\RecipientTypes;
+use LaravelEnso\Emails\app\Enums\SendTo;
 use LaravelEnso\Helpers\app\Exceptions\EnsoException;
 
 class MailManager
@@ -39,7 +39,7 @@ class MailManager
 
     private function syncRecipients()
     {
-        switch((int) $this->request->get('sendTo')) {
+        switch ((int) $this->request->get('sendTo')) {
             case SendTo::Users:
                 $this->email->users()->sync($this->users());
                 break;
@@ -62,7 +62,7 @@ class MailManager
             RecipientTypes::To => $this->request->get('to'),
             RecipientTypes::Cc => $this->request->get('cc'),
             RecipientTypes::Bcc => $this->request->get('bcc'),
-        ])->mapWithKeys(function($ids, $type) {
+        ])->mapWithKeys(function ($ids, $type) {
             return $this->buildPivot($ids, $type);
         })->filter();
     }

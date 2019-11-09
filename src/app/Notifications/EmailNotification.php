@@ -3,11 +3,11 @@
 namespace LaravelEnso\Emails\Notifications;
 
 use Illuminate\Bus\Queueable;
-use LaravelEnso\Emails\app\Email;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+use LaravelEnso\Emails\app\Email;
 
 class EmailNotification extends Notification implements ShouldQueue
 {

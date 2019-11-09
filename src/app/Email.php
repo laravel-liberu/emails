@@ -2,15 +2,15 @@
 
 namespace LaravelEnso\Emails\app;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Teams\app\Models\Team;
-use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Emails\Jobs\SendEmails;
-use LaravelEnso\Emails\app\Enums\Statuses;
-use LaravelEnso\Tables\app\Traits\TableCache;
-use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 use LaravelEnso\Emails\app\Enums\RecipientTypes;
+use LaravelEnso\Emails\app\Enums\Statuses;
+use LaravelEnso\Emails\Jobs\SendEmails;
+use LaravelEnso\Tables\app\Traits\TableCache;
+use LaravelEnso\Teams\app\Models\Team;
+use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 
 class Email extends Model
 {
