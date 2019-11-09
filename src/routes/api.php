@@ -1,4 +1,5 @@
 <?php
+
 Route::middleware(['web', 'auth', 'core'])
     ->group(function () {
         Route::namespace('LaravelEnso\Emails\app\Http\Controllers\Emails')

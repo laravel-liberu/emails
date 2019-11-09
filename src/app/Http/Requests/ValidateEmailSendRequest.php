@@ -3,10 +3,10 @@
 namespace LaravelEnso\Emails\app\Http\Requests;
 
 use Carbon\Carbon;
-use Illuminate\Validation\Rule;
-use LaravelEnso\Emails\app\Enums\SendTo;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use LaravelEnso\Emails\app\Enums\Priorities;
+use LaravelEnso\Emails\app\Enums\SendTo;
 use LaravelEnso\Helpers\app\Traits\MapsRequestKeys;
 
 class ValidateEmailSendRequest extends FormRequest
@@ -21,7 +21,7 @@ class ValidateEmailSendRequest extends FormRequest
     public function rules()
     {
         return [
-            'sendTo' => 'in:' . SendTo::keys()->implode(','),
+            'sendTo' => 'in:'.SendTo::keys()->implode(','),
             'to' => 'nullable|array',
             'to.*' => 'exists:users,id',
             'cc' => 'nullable|array',
@@ -40,7 +40,7 @@ class ValidateEmailSendRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if ((int)$this->get('sendTo') === SendTo::Users) {
+            if ((int) $this->get('sendTo') === SendTo::Users) {
                 $this->checkRecipients(
                     $validator,
                     $this->get('to'),
@@ -61,12 +61,14 @@ class ValidateEmailSendRequest extends FormRequest
         if (empty($to)) {
             $validator->errors()
                 ->add('to', __('You must select at least one recipient!'));
+
             return;
         }
 
         if (! empty($cc) && $this->intersectsAtLeastOne($cc, $to, $bcc ?? [])) {
             $validator->errors()
                 ->add('cc', __('Some cc recipients are already selected in "to" or "bcc"!'));
+
             return;
         }
 

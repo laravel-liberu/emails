@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Emails\app\Tables\Builders;
 
-use LaravelEnso\Emails\app\Email;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelEnso\Emails\app\Email;
 use LaravelEnso\Tables\app\Contracts\Table;
 
 class EmailTable implements Table

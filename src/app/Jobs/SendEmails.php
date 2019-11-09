@@ -5,12 +5,12 @@ namespace LaravelEnso\Emails\Jobs;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use LaravelEnso\Emails\app\Email;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use LaravelEnso\Emails\app\Enums\SendTo;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use LaravelEnso\Emails\app\Email;
+use LaravelEnso\Emails\app\Enums\SendTo;
 use LaravelEnso\Emails\Notifications\EmailNotification;
 
 class SendEmails implements ShouldQueue
@@ -44,9 +44,9 @@ class SendEmails implements ShouldQueue
 
     public function users()
     {
-        return $this->email->send_to === SendTo::Teams 
-            ? User::whereHas('teams', function($teams) {
-                $teams->whereHas('emails', function($emails) {
+        return $this->email->send_to === SendTo::Teams
+            ? User::whereHas('teams', function ($teams) {
+                $teams->whereHas('emails', function ($emails) {
                     $emails->whereId($this->email->id);
                 });
             })->get()

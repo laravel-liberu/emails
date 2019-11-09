@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Emails\app\Http\Controllers\Emails;
 
-use LaravelEnso\Emails\app\Tables\Builders\EmailTable;
 use Illuminate\Routing\Controller;
+use LaravelEnso\Emails\app\Tables\Builders\EmailTable;
 use LaravelEnso\Tables\app\Traits\Data;
 
 class TableData extends Controller
