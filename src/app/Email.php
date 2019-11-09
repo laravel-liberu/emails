@@ -11,11 +11,10 @@ use LaravelEnso\Emails\app\Enums\Statuses;
 use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 use LaravelEnso\Emails\app\Enums\RecipientTypes;
-use LaravelEnso\Helpers\app\Traits\DateAttributes;
 
 class Email extends Model
 {
-    use DateAttributes, CreatedBy, TableCache;
+    use CreatedBy, TableCache;
 
     protected $fillable = [
         'subject', 'body', 'priority', 'send_to', 'schedule_at',
@@ -33,7 +32,7 @@ class Email extends Model
             'recipient_id'
         )->withPivot('type');
     }
-    
+
     public function to()
     {
         return $this->users()->whereType(RecipientTypes::To);
@@ -53,7 +52,7 @@ class Email extends Model
     {
         return $this->belongsToMany(Team::class);
     }
-   
+
     public function attachments()
     {
         return $this->morphMany(EmailAttachment::class, 'attachable');
@@ -84,7 +83,7 @@ class Email extends Model
 
     public function getStatusAttribute()
     {
-        if (!$this->sent_at && !$this->schedule_at) {
+        if (! $this->sent_at && ! $this->schedule_at) {
             return Statuses::Draft;
         }
 
