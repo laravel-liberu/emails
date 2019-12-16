@@ -6,7 +6,7 @@ use LaravelEnso\Enums\app\Services\Enum;
 
 class SendTo extends Enum
 {
-    const Users = 1;
-    const Teams = 2;
-    const All = 3;
+    public const Users = 1;
+    public const Teams = 2;
+    public const All = 3;
 }

@@ -7,7 +7,6 @@ Route::middleware(['web', 'auth', 'core'])
             ->group(function () {
                 Route::post('send', 'Send')->name('send');
                 Route::post('', 'Store')->name('store');
-                Route::get('create', 'Create')->name('create');
                 Route::get('{email}/edit', 'Edit')->name('edit');
                 Route::post('{email}/update', 'Update')->name('update');
                 Route::delete('{email}', 'Destroy')->name('destroy');
