@@ -6,7 +6,7 @@ use LaravelEnso\Enums\app\Services\Enum;
 
 class Statuses extends Enum
 {
-    const Sent = 1;
-    const Scheduled = 2;
-    const Draft = 3;
+    public const Sent = 1;
+    public const Scheduled = 2;
+    public const Draft = 3;
 }

@@ -10,7 +10,7 @@ class EmailTable implements Table
 {
     protected const TemplatePath = __DIR__.'/../Templates/emails.json';
 
-    public function query() : Builder
+    public function query(): Builder
     {
         return Email::selectRaw('
             emails.id, emails.subject, emails.body, emails.priority, emails.created_at,

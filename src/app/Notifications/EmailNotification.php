@@ -50,7 +50,7 @@ class EmailNotification extends Notification implements ShouldQueue
 
     private function createMessage()
     {
-        return (new MailMessage)->from(
+        return (new MailMessage())->from(
                 $this->email->createdBy->email,
                 $this->email->createdBy->name
             )->priority($this->email->priority)

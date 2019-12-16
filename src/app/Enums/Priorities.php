@@ -6,7 +6,7 @@ use LaravelEnso\Enums\app\Services\Enum;
 
 class Priorities extends Enum
 {
-    const High = 1;
-    const Normal = 3;
-    const Low = 5;
+    public const High = 1;
+    public const Normal = 3;
+    public const Low = 5;
 }

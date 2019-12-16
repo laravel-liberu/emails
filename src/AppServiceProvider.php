@@ -49,9 +49,4 @@ class AppServiceProvider extends ServiceProvider
             __DIR__.'/resources/js' => resource_path('js'),
         ], 'emails-assets');
     }
-
-    public function register()
-    {
-        //
-    }
 }
