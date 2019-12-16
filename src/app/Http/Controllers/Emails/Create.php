@@ -10,6 +10,8 @@ class Create extends Controller
 {
     public function __invoke(FormRequest $request, Email $email)
     {
+        //TODO can we remove this?
+
         return [
             'message' => __('The email was successfully saved!'),
         ];
