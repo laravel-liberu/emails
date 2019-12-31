@@ -22,7 +22,7 @@ Emails package is an extesion of the Laravel Enso enviroment, designed for sendi
 ### Instalation
 * install the package using composer: `composer require laravel-enso/emails`
 * install the front-end assets using yarn/npm: `yarn add @enso-ui/emails`
-* add the following line in `schedule` function in `app\Console\Kernel.php` class:
+* add the following line in `schedule` function in `App\Console\Kernel.php` class:
 ```
     ...
     protected function schedule(Schedule $schedule)

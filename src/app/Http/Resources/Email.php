@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Emails\app\Http\Resources;
+namespace LaravelEnso\Emails\App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use LaravelEnso\TrackWho\app\Http\Resources\TrackWho;
+use LaravelEnso\TrackWho\App\Http\Resources\TrackWho;
 
 class Email extends JsonResource
 {
@@ -14,7 +14,7 @@ class Email extends JsonResource
             'priority' => $this->priority,
             'subject' => $this->subject,
             'body' => $this->body,
-            'scheduleAt' => optional($this->schedule_at)->format('d-m-Y H:i'),
+            'scheduleAt' => $this->schedule_at,
             'sentAt' => $this->sent_at,
             'createdBy' => new TrackWho($this->whenLoaded('createdBy')),
             'to' => $this->whenLoaded('to', $this->to->pluck('id')),

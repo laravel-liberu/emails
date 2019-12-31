@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\Emails\app\Http\Requests;
+namespace LaravelEnso\Emails\App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use LaravelEnso\Emails\app\Enums\Priorities;
-use LaravelEnso\Emails\app\Enums\SendTo;
-use LaravelEnso\Helpers\app\Traits\MapsRequestKeys;
+use LaravelEnso\Emails\App\Enums\Priorities;
+use LaravelEnso\Emails\App\Enums\SendTo;
+use LaravelEnso\Helpers\App\Traits\MapsRequestKeys;
 
 class ValidateEmailRequest extends FormRequest
 {
@@ -29,7 +29,7 @@ class ValidateEmailRequest extends FormRequest
             'bcc.*' => 'exists:users,id',
             'subject' => 'required|string|max:255',
             'body' => 'nullable|string',
-            'scheduleAt' => 'nullable|date_format:d-m-Y H:i',
+            'scheduleAt' => 'nullable|date_format:Y-m-d H:i',
             'priority' => Rule::in(Priorities::keys()),
         ];
     }

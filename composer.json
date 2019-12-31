@@ -36,7 +36,6 @@
         "laravel": {
             "providers": [
                 "LaravelEnso\\Emails\\AppServiceProvider",
-                "LaravelEnso\\Emails\\AuthServiceProvider",
                 "LaravelEnso\\Emails\\EnumServiceProvider"
             ]
         }

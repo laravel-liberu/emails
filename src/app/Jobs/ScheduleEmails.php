@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Emails\app\Jobs;
+namespace LaravelEnso\Emails\App\Jobs;
 
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use LaravelEnso\Emails\app\Email;
+use LaravelEnso\Emails\App\Email;
 
 class ScheduleEmails implements ShouldQueue
 {

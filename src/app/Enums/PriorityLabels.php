@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Emails\app\Enums;
+namespace LaravelEnso\Emails\App\Enums;
 
-use LaravelEnso\Enums\app\Services\Enum;
+use LaravelEnso\Enums\App\Services\Enum;
 
 class PriorityLabels extends Enum
 {

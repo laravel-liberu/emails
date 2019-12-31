@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use LaravelEnso\Emails\app\Email;
+use LaravelEnso\Emails\App\Email;
 
 class EmailNotification extends Notification implements ShouldQueue
 {
@@ -20,12 +20,12 @@ class EmailNotification extends Notification implements ShouldQueue
         $this->email = $email;
     }
 
-    public function via($notifiable)
+    public function via()
     {
         return ['mail', 'broadcast', 'database'];
     }
 
-    public function toBroadcast($notifiable)
+    public function toBroadcast()
     {
         return new BroadcastMessage([
             'level' => 'info',
@@ -35,7 +35,7 @@ class EmailNotification extends Notification implements ShouldQueue
         ]);
     }
 
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
             'body' => __("You've received a new email!"),
@@ -43,34 +43,28 @@ class EmailNotification extends Notification implements ShouldQueue
         ];
     }
 
-    public function toMail($notifiable)
+    public function toMail()
     {
-        return $this->attachFiles($this->createMessage());
+        $mail = (new MailMessage())->from(
+            $this->email->createdBy->email, $this->email->createdBy->name
+        )->priority($this->email->priority)
+        ->cc($this->email->cc()->pluck('email'))
+        ->bcc($this->email->bcc()->pluck('email'))
+        ->subject($this->email->subject)
+        ->line($this->email->body)
+        ->line('Thank you for using our application!');
+
+        $this->attachFiles($mail);
+
+        return $mail;
     }
 
-    private function createMessage()
+    private function attachFiles($mail)
     {
-        return (new MailMessage())->from(
-                $this->email->createdBy->email,
-                $this->email->createdBy->name
-            )->priority($this->email->priority)
-            ->cc($this->email->cc()->pluck('email'))
-            ->bcc($this->email->bcc()->pluck('email'))
-            ->subject($this->email->subject)
-            ->line($this->email->body)
-            ->line('Thank you for using our application!');
-    }
-
-    private function attachFiles($message)
-    {
-        collect($this->email->attachments()->with('file')->get())
-            ->each(function ($attachment) use ($message) {
-                $message->attach(
-                    storage_path('app/files/'.$attachment->file->saved_name),
-                    ['as' => $attachment->file->original_name]
-                );
-            });
-
-        return $message;
+        $this->email->attachments()->with('file')->get()
+            ->each(fn ($attachment) => $mail->attach(
+                storage_path("app/files{$attachment->file->saved_name}"),
+                ['as' => $attachment->file->original_name]
+            ));
     }
 }

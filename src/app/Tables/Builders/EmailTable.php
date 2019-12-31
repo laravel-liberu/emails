@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails\app\Tables\Builders;
+namespace LaravelEnso\Emails\App\Tables\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
-use LaravelEnso\Emails\app\Email;
-use LaravelEnso\Tables\app\Contracts\Table;
+use LaravelEnso\Emails\App\Email;
+use LaravelEnso\Tables\App\Contracts\Table;
 
 class EmailTable implements Table
 {

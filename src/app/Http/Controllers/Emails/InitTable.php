@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails\app\Http\Controllers\Emails;
+namespace LaravelEnso\Emails\App\Http\Controllers\Emails;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Emails\app\Tables\Builders\EmailTable;
-use LaravelEnso\Tables\app\Traits\Init;
+use LaravelEnso\Emails\App\Tables\Builders\EmailTable;
+use LaravelEnso\Tables\App\Traits\Init;
 
 class InitTable extends Controller
 {

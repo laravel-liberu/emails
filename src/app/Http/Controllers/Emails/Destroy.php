@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Emails\app\Http\Controllers\Emails;
+namespace LaravelEnso\Emails\App\Http\Controllers\Emails;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Emails\app\Email;
+use LaravelEnso\Emails\App\Email;
 
 class Destroy extends Controller
 {
