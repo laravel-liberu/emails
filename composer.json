@@ -19,13 +19,13 @@
     "keywords": [],
     "homepage": "https://www.laravel-enso.com",
     "require": {
-        "laravel-enso/enums": "1.1.*",
-        "laravel-enso/files": "3.3.*",
-        "laravel-enso/forms": "3.3.*",
-        "laravel-enso/helpers": "1.14.*",
-        "laravel-enso/select": "3.2.*",
-        "laravel-enso/tables": "3.1.*",
-        "laravel-enso/teams": "2.1.*"
+        "laravel-enso/enums": "1.2.*",
+        "laravel-enso/files": "3.4.*",
+        "laravel-enso/forms": "3.4.*",
+        "laravel-enso/helpers": "1.15.*",
+        "laravel-enso/select": "3.3.*",
+        "laravel-enso/tables": "3.2.*",
+        "laravel-enso/teams": "2..*"
     },
     "autoload": {
         "psr-4": {

@@ -6,7 +6,7 @@ use LaravelEnso\Enums\App\Services\Enum;
 
 class StatusLabels extends Enum
 {
-    protected static $data = [
+    protected static array $data = [
         Statuses::Sent => 'is-success',
         Statuses::Scheduled => 'is-warning',
         Statuses::Draft => 'is-info',
