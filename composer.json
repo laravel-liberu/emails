@@ -19,6 +19,7 @@
     "keywords": [],
     "homepage": "https://www.laravel-enso.com",
     "require": {
+        "laravel-enso/core": "4.8.*",
         "laravel-enso/enums": "1.2.*",
         "laravel-enso/files": "3.4.*",
         "laravel-enso/forms": "3.4.*",
