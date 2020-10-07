@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use LaravelEnso\Emails\Http\Controllers\Emails\Destroy;
+use LaravelEnso\Emails\Http\Controllers\Emails\Edit;
+use LaravelEnso\Emails\Http\Controllers\Emails\InitTable;
 use LaravelEnso\Emails\Http\Controllers\Emails\Send;
 use LaravelEnso\Emails\Http\Controllers\Emails\Store;
-use LaravelEnso\Emails\Http\Controllers\Emails\Edit;
-use LaravelEnso\Emails\Http\Controllers\Emails\Update;
-use LaravelEnso\Emails\Http\Controllers\Emails\Destroy;
-use LaravelEnso\Emails\Http\Controllers\Emails\InitTable;
 use LaravelEnso\Emails\Http\Controllers\Emails\TableData;
+use LaravelEnso\Emails\Http\Controllers\Emails\Update;
 
 Route::middleware(['api', 'auth', 'core'])
     ->prefix('api/emails')
