@@ -2,8 +2,7 @@
     "name": "laravel-enso/emails",
     "type": "library",
     "description": "",
-    "authors": [
-        {
+    "authors": [{
             "name": "Manuela Mindroc",
             "email": "manuela.mindroc@earthlink.com",
             "homepage": "https://laravel-enso.com",
@@ -19,14 +18,14 @@
     "keywords": [],
     "homepage": "https://www.laravel-enso.com",
     "require": {
-        "laravel-enso/core": "4.8.*",
-        "laravel-enso/enums": "1.2.*",
-        "laravel-enso/files": "3.4.*",
-        "laravel-enso/forms": "3.4.*",
-        "laravel-enso/helpers": "1.15.*",
-        "laravel-enso/select": "3.3.*",
-        "laravel-enso/tables": "3.2.*",
-        "laravel-enso/teams": "2..*"
+        "laravel-enso/core": "^5.0|^6.0",
+        "laravel-enso/enums": "^2.0",
+        "laravel-enso/files": "^4.0",
+        "laravel-enso/forms": "^4.0",
+        "laravel-enso/helpers": "^2.0",
+        "laravel-enso/select": "^4.0",
+        "laravel-enso/tables": "^4.0",
+        "laravel-enso/teams": "^3.0"
     },
     "autoload": {
         "psr-4": {

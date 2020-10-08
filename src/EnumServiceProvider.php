@@ -2,12 +2,12 @@
 
 namespace LaravelEnso\Emails;
 
-use LaravelEnso\Emails\App\Enums\Priorities;
-use LaravelEnso\Emails\App\Enums\PriorityLabels;
-use LaravelEnso\Emails\App\Enums\RecipientTypes;
-use LaravelEnso\Emails\App\Enums\SendTo;
-use LaravelEnso\Emails\App\Enums\Statuses;
-use LaravelEnso\Emails\App\Enums\StatusLabels;
+use LaravelEnso\Emails\Enums\Priorities;
+use LaravelEnso\Emails\Enums\PriorityLabels;
+use LaravelEnso\Emails\Enums\RecipientTypes;
+use LaravelEnso\Emails\Enums\SendTo;
+use LaravelEnso\Emails\Enums\Statuses;
+use LaravelEnso\Emails\Enums\StatusLabels;
 use LaravelEnso\Enums\EnumServiceProvider as ServiceProvider;
 
 class EnumServiceProvider extends ServiceProvider
