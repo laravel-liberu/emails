@@ -61,7 +61,7 @@ class Email extends Model
     public function uploadAttachments($files)
     {
         (new Collection($files))->each(fn ($file) => $this->attachments()
-            ->create()->upload($file));
+            ->create()->file->upload($file));
     }
 
     public function send()
