@@ -8,7 +8,7 @@ use LaravelEnso\Emails\Enums\Priorities;
 use LaravelEnso\Emails\Enums\SendTo;
 use LaravelEnso\Helpers\Traits\MapsRequestKeys;
 
-class ValidateEmailRequest extends FormRequest
+class ValidateEmail extends FormRequest
 {
     use MapsRequestKeys;
 
@@ -20,7 +20,7 @@ class ValidateEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'sendTo' => 'in:'.SendTo::keys()->implode(','),
+            'sendTo' => 'in:' . SendTo::keys()->implode(','),
             'to' => 'nullable|array',
             'to.*' => 'exists:users,id',
             'cc' => 'nullable|array',

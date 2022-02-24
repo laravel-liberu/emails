@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use LaravelEnso\Emails\Enums\SendTo;
 use LaravelEnso\Helpers\Traits\MapsRequestKeys;
 
-class ValidateEmailSendRequest extends ValidateEmailRequest
+class ValidateEmailSend extends ValidateEmail
 {
     use MapsRequestKeys;
 
@@ -39,7 +39,7 @@ class ValidateEmailSendRequest extends ValidateEmailRequest
 
     private function checkRecipients($validator)
     {
-        if (! $this->filled('to')) {
+        if (!$this->filled('to')) {
             $validator->errors()
                 ->add('to', __('You must select at least one recipient!'));
         }
@@ -57,8 +57,8 @@ class ValidateEmailSendRequest extends ValidateEmailRequest
 
     private function duplicate(string $toCheck, string $first, string $second)
     {
-        return ! empty(array_intersect($this->get($toCheck), $this->get($first)))
-            || ! empty(array_intersect($toCheck, $second));
+        return !empty(array_intersect($this->get($toCheck), $this->get($first)))
+            || !empty(array_intersect($toCheck, $second));
     }
 
     private function invalidSchedule()
