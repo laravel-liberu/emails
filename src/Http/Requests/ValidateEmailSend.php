@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use LaravelEnso\Emails\Enums\SendTo;
 use LaravelEnso\Helpers\Traits\MapsRequestKeys;
 
-class ValidateEmailSendRequest extends ValidateEmailRequest
+class ValidateEmailSend extends ValidateEmail
 {
     use MapsRequestKeys;
 
