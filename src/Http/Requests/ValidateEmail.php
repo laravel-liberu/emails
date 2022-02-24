@@ -20,7 +20,7 @@ class ValidateEmail extends FormRequest
     public function rules()
     {
         return [
-            'sendTo' => 'in:' . SendTo::keys()->implode(','),
+            'sendTo' => 'in:'.SendTo::keys()->implode(','),
             'to' => 'nullable|array',
             'to.*' => 'exists:users,id',
             'cc' => 'nullable|array',
