@@ -11,6 +11,11 @@ class CreateEmailAttachmentsTable extends Migration
         Schema::create('email_attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('attachable');
+
+            $table->unsignedBigInteger('file_id')->nullable();
+            $table->foreign('file_id')->references('id')->on('files')
+                ->onUpdate('restrict')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
