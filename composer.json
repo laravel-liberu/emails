@@ -1,32 +1,32 @@
 {
-    "name": "laravel-enso/emails",
+    "name": "cgdsoftware/emails",
     "type": "library",
     "description": "",
     "authors": [
         {
             "name": "Manuela Mindroc",
             "email": "manuela.mindroc@earthlink.com",
-            "homepage": "https://laravel-enso.com",
+            "homepage": "https://cgdsoftware.com",
             "role": "Developer"
         },
         {
             "name": "Ionut-Catalin Sandu",
             "email": "catalin.sandu@earthlink.com",
-            "homepage": "https://laravel-enso.com",
+            "homepage": "https://cgdsoftware.com",
             "role": "Developer"
         }
     ],
     "keywords": [],
-    "homepage": "https://www.laravel-enso.com",
+    "homepage": "https://www.cgdsoftware.com",
     "require": {
-        "laravel-enso/core": "^8.0",
-        "laravel-enso/enums": "^2.0",
-        "laravel-enso/files": "^5.0",
-        "laravel-enso/forms": "^4.0",
-        "laravel-enso/helpers": "^2.0",
-        "laravel-enso/select": "^4.0",
-        "laravel-enso/tables": "^4.0",
-        "laravel-enso/teams": "^4.0"
+        "cgdsoftware/core": "^8.0",
+        "cgdsoftware/enums": "^2.0",
+        "cgdsoftware/files": "^5.0",
+        "cgdsoftware/forms": "^4.0",
+        "cgdsoftware/helpers": "^2.0",
+        "cgdsoftware/select": "^4.0",
+        "cgdsoftware/tables": "^4.0",
+        "cgdsoftware/teams": "^4.0"
     },
     "autoload": {
         "psr-4": {
