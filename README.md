@@ -8,9 +8,9 @@
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/emails/version)](https://packagist.org/packages/laravel-enso/emails)
 
 
-Emails package is an extesion of the Laravel Enso enviroment, designed for sending emails/notifications.
+Emails package is an extesion of the Laravel Liberu enviroment, designed for sending emails/notifications.
 
-**Note:** *This package cannot be used outside of enso enviroment and is not included in [Laravel Enso Core](https://github.com/laravel-enso/Core) packages.*
+**Note:** *This package cannot be used outside of enso enviroment and is not included in [Laravel Liberu Core](https://github.com/laravel-enso/Core) packages.*
 
 ### Features
 * friendly display of all stored emails together with their status

@@ -1,32 +1,32 @@
 {
-    "name": "cgdsoftware/emails",
+    "name": "laravel-liberu/emails",
     "type": "library",
     "description": "",
     "authors": [
         {
             "name": "Manuela Mindroc",
             "email": "manuela.mindroc@earthlink.com",
-            "homepage": "https://cgdsoftware.com",
+            "homepage": "https://laravel-liberu.com",
             "role": "Developer"
         },
         {
             "name": "Ionut-Catalin Sandu",
             "email": "catalin.sandu@earthlink.com",
-            "homepage": "https://cgdsoftware.com",
+            "homepage": "https://laravel-liberu.com",
             "role": "Developer"
         }
     ],
     "keywords": [],
-    "homepage": "https://www.cgdsoftware.com",
+    "homepage": "https://www.laravel-liberu.com",
     "require": {
-        "cgdsoftware/core": "^8.0",
-        "cgdsoftware/enums": "^2.0",
-        "cgdsoftware/files": "^5.0",
-        "cgdsoftware/forms": "^4.0",
-        "cgdsoftware/helpers": "^2.0",
-        "cgdsoftware/select": "^4.0",
-        "cgdsoftware/tables": "^4.0",
-        "cgdsoftware/teams": "^4.0"
+        "laravel-liberu/core": "^8.0",
+        "laravel-liberu/enums": "^2.0",
+        "laravel-liberu/files": "^5.0",
+        "laravel-liberu/forms": "^4.0",
+        "laravel-liberu/helpers": "^2.0",
+        "laravel-liberu/select": "^4.0",
+        "laravel-liberu/tables": "^4.0",
+        "laravel-liberu/teams": "^4.0"
     },
     "autoload": {
         "psr-4": {
