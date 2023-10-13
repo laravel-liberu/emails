@@ -30,14 +30,14 @@
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Emails\\": "src/"
+            "LaravelLiberu\\Emails\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelEnso\\Emails\\AppServiceProvider",
-                "LaravelEnso\\Emails\\EnumServiceProvider"
+                "LaravelLiberu\\Emails\\AppServiceProvider",
+                "LaravelLiberu\\Emails\\EnumServiceProvider"
             ]
         }
     },

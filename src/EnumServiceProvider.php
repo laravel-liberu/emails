@@ -1,14 +1,14 @@
 <?php
 
-namespace LaravelEnso\Emails;
+namespace LaravelLiberu\Emails;
 
-use LaravelEnso\Emails\Enums\Priorities;
-use LaravelEnso\Emails\Enums\PriorityLabels;
-use LaravelEnso\Emails\Enums\RecipientTypes;
-use LaravelEnso\Emails\Enums\SendTo;
-use LaravelEnso\Emails\Enums\Statuses;
-use LaravelEnso\Emails\Enums\StatusLabels;
-use LaravelEnso\Enums\EnumServiceProvider as ServiceProvider;
+use LaravelLiberu\Emails\Enums\Priorities;
+use LaravelLiberu\Emails\Enums\PriorityLabels;
+use LaravelLiberu\Emails\Enums\RecipientTypes;
+use LaravelLiberu\Emails\Enums\SendTo;
+use LaravelLiberu\Emails\Enums\Statuses;
+use LaravelLiberu\Emails\Enums\StatusLabels;
+use LaravelLiberu\Enums\EnumServiceProvider as ServiceProvider;
 
 class EnumServiceProvider extends ServiceProvider
 {

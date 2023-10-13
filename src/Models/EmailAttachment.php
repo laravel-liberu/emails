@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails\Models;
+namespace LaravelLiberu\Emails\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Files\Contracts\Attachable;
-use LaravelEnso\Files\Traits\HasFile;
+use LaravelLiberu\Files\Contracts\Attachable;
+use LaravelLiberu\Files\Traits\HasFile;
 
 class EmailAttachment extends Model implements Attachable
 {

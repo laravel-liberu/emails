@@ -1,19 +1,19 @@
 <?php
 
-namespace LaravelEnso\Emails\Models;
+namespace LaravelLiberu\Emails\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use LaravelEnso\Core\Models\User;
-use LaravelEnso\Emails\Enums\RecipientTypes;
-use LaravelEnso\Emails\Enums\SendTo;
-use LaravelEnso\Emails\Enums\Statuses;
-use LaravelEnso\Emails\Jobs\SendEmails;
-use LaravelEnso\Helpers\Exceptions\EnsoException;
-use LaravelEnso\Tables\Traits\TableCache;
-use LaravelEnso\Teams\Models\Team;
-use LaravelEnso\TrackWho\Traits\CreatedBy;
+use LaravelLiberu\Core\Models\User;
+use LaravelLiberu\Emails\Enums\RecipientTypes;
+use LaravelLiberu\Emails\Enums\SendTo;
+use LaravelLiberu\Emails\Enums\Statuses;
+use LaravelLiberu\Emails\Jobs\SendEmails;
+use LaravelLiberu\Helpers\Exceptions\EnsoException;
+use LaravelLiberu\Tables\Traits\TableCache;
+use LaravelLiberu\Teams\Models\Team;
+use LaravelLiberu\TrackWho\Traits\CreatedBy;
 
 class Email extends Model
 {

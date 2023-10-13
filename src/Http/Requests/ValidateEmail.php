@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\Emails\Http\Requests;
+namespace LaravelLiberu\Emails\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use LaravelEnso\Emails\Enums\Priorities;
-use LaravelEnso\Emails\Enums\SendTo;
-use LaravelEnso\Helpers\Traits\MapsRequestKeys;
+use LaravelLiberu\Emails\Enums\Priorities;
+use LaravelLiberu\Emails\Enums\SendTo;
+use LaravelLiberu\Helpers\Traits\MapsRequestKeys;
 
 class ValidateEmail extends FormRequest
 {

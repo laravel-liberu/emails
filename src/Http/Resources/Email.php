@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Emails\Http\Resources;
+namespace LaravelLiberu\Emails\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use LaravelEnso\Core\Http\Resources\User;
+use LaravelLiberu\Core\Http\Resources\User;
 
 class Email extends JsonResource
 {

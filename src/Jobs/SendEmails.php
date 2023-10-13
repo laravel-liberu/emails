@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Emails\Jobs;
+namespace LaravelLiberu\Emails\Jobs;
 
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -8,10 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use LaravelEnso\Core\Models\User;
-use LaravelEnso\Emails\Enums\SendTo;
-use LaravelEnso\Emails\Models\Email;
-use LaravelEnso\Emails\Notifications\EmailNotification;
+use LaravelLiberu\Core\Models\User;
+use LaravelLiberu\Emails\Enums\SendTo;
+use LaravelLiberu\Emails\Models\Email;
+use LaravelLiberu\Emails\Notifications\EmailNotification;
 
 class SendEmails implements ShouldQueue
 {

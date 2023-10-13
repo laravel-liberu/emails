@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails\Http\Requests;
+namespace LaravelLiberu\Emails\Http\Requests;
 
 use Carbon\Carbon;
-use LaravelEnso\Emails\Enums\SendTo;
-use LaravelEnso\Helpers\Traits\MapsRequestKeys;
+use LaravelLiberu\Emails\Enums\SendTo;
+use LaravelLiberu\Helpers\Traits\MapsRequestKeys;
 
 class ValidateEmailSend extends ValidateEmail
 {

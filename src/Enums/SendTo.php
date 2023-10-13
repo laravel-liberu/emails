@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Emails\Enums;
+namespace LaravelLiberu\Emails\Enums;
 
-use LaravelEnso\Enums\Services\Enum;
+use LaravelLiberu\Enums\Services\Enum;
 
 class SendTo extends Enum
 {

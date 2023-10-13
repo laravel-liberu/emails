@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails;
+namespace LaravelLiberu\Emails;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Core\Models\User;
-use LaravelEnso\Teams\Models\Team;
+use LaravelLiberu\Core\Models\User;
+use LaravelLiberu\Teams\Models\Team;
 
 class AppServiceProvider extends ServiceProvider
 {

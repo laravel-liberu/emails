@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails\Tables\Builders;
+namespace LaravelLiberu\Emails\Tables\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
-use LaravelEnso\Emails\Models\Email as Model;
-use LaravelEnso\Tables\Contracts\Table;
+use LaravelLiberu\Emails\Models\Email as Model;
+use LaravelLiberu\Tables\Contracts\Table;
 
 class Email implements Table
 {

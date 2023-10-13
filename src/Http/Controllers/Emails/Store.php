@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails\Http\Controllers\Emails;
+namespace LaravelLiberu\Emails\Http\Controllers\Emails;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Emails\Http\Requests\ValidateEmail;
-use LaravelEnso\Emails\Models\Email;
+use LaravelLiberu\Emails\Http\Requests\ValidateEmail;
+use LaravelLiberu\Emails\Models\Email;
 
 class Store extends Controller
 {

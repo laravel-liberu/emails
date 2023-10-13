@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails\Http\Controllers\Emails;
+namespace LaravelLiberu\Emails\Http\Controllers\Emails;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Emails\Http\Requests\ValidateEmailSend;
-use LaravelEnso\Emails\Models\Email;
+use LaravelLiberu\Emails\Http\Requests\ValidateEmailSend;
+use LaravelLiberu\Emails\Models\Email;
 
 class Send extends Controller
 {

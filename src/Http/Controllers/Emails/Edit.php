@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Emails\Http\Controllers\Emails;
+namespace LaravelLiberu\Emails\Http\Controllers\Emails;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Emails\Http\Resources\Email as Resource;
-use LaravelEnso\Emails\Models\Email;
+use LaravelLiberu\Emails\Http\Resources\Email as Resource;
+use LaravelLiberu\Emails\Models\Email;
 
 class Edit extends Controller
 {
