@@ -10,7 +10,7 @@ use LaravelLiberu\Emails\Enums\RecipientTypes;
 use LaravelLiberu\Emails\Enums\SendTo;
 use LaravelLiberu\Emails\Enums\Statuses;
 use LaravelLiberu\Emails\Jobs\SendEmails;
-use LaravelLiberu\Helpers\Exceptions\EnsoException;
+use LaravelLiberu\Helpers\Exceptions\LiberuException;
 use LaravelLiberu\Tables\Traits\TableCache;
 use LaravelLiberu\Teams\Models\Team;
 use LaravelLiberu\TrackWho\Traits\CreatedBy;
@@ -109,7 +109,7 @@ class Email extends Model
                 $this->email->users()->sync($this->all());
                 break;
             default:
-                throw new EnsoException('Invalid send to option!');
+                throw new LiberuException('Invalid send to option!');
         }
 
         return $this;
@@ -122,9 +122,9 @@ class Email extends Model
             $this->email->uploadAttachments(
                 $this->request->allFiles()
             );
-        } catch (EnsoException $exception) {
+        } catch (LiberuException $exception) {
             $this->email->update(['schedule_at' => null]);
-            throw new EnsoException('Upload error!');
+            throw new LiberuException('Upload error!');
         }
 
         return $this;
